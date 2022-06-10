@@ -26,6 +26,10 @@ all :
 $(NAME)	: $(OBJ)
 	$(CC) $(CFLAGS) -I libft/ -I include/ $(OBJ) libft/libft.a -o $(NAME) $(LIB)
 
+key :#a retirer
+	cd ./mlx_linux && make && cd ..
+	$(CC) srcs/key_handling.c -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o key
+
 clean :
 		@make clean -C $(LIBFT)
 		@rm -rf $(OBJ)
