@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/06/10 13:49:04 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/10 16:45:14 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	right_name(char *str, t_info *info)
 
 	i = 0;
 	flag = 0;
-	if (ft_strlen(str) > 2 && str[i] == 'N' && str[i + 1] == 'O')
+	if (!ft_strncmp(str, "NO", 2))
 	{
 		info->no_path = ft_substr(str, 2, ft_strlen(str));
 		if (!info->no_path)
@@ -106,7 +106,7 @@ to get data from .cub\n"));
 		if (is_map(tmp->content))
 		{
 			if (cpy_map(count, info, tmp))
-				
+				return (EXIT_FAILURE);
 			break ;
 		}
 		tmp = tmp->next;
@@ -125,5 +125,34 @@ int	is_map(char *str)
 		i++;
 	if (str[i] && str[i] == '1')
 		return (1);
+	return (0);
+}
+
+int	check_map(t_info *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (check_border_horiz(info->map[0]))
+		return (print_error("Top border of the map is not made of '1' and spaces\n")); // error
+	while(info->map[i])
+	{
+		j = 0;
+		if (check_first_wall(info->map[i]))
+			return (print_error("Map is not bounded by walls\n"));
+		while (info->map[i][j])
+		{
+			if (info->map[i][j] != '1' && info->map[i][j] != '0' && info->map[i][j] != 'N' \
+&& info->map[i][j] != 'S' && info->map[i][j] != 'W' && info->map[i][j] != 'E' && info->map[i][j] != ' ')
+				return (print_error("Character of the map can only be : 1, 0, N, E, S, W or spaces\n"));
+			j++;
+		}
+		if (check_last_wall(info->map[i], j - 1))
+			return (print_error("Map is not bounded by walls\n"));
+		i++;
+	}
+	if (check_border_horiz(info->map[i - 1]))
+		return (print_error("Bottom border of the map is not made of '1' and spaces\n"));
 	return (0);
 }

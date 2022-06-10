@@ -9,6 +9,7 @@ SRCS =	srcs/main.c	\
 		srcs/parsing/check_content.c \
 		srcs/parsing/empty_space.c \
 		srcs/parsing/check_map.c \
+		srcs/parsing/check_border.c \
 		srcs/utils/free_utils.c 
 
 OBJ		= ${SRCS:.c=.o}

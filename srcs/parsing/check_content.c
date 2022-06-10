@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/10 13:47:30 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/10 16:44:04 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,6 @@ static char	*trim_space(char *str)
 	return (tmp);
 }
 
-/* int	check_first_letter(char *str)
-{
-	if (str[0] == 'N' || str[0] == 'W' || str[0] == 'E' || str[0] == 'S' || \
-str[0] == 'F' || str[0] == 'C')
-		
-} */
-
 static int	suppress_space(t_list **lst)
 {
 	t_list	*tmp;
@@ -122,6 +115,10 @@ t_info	*check_content(t_list **lst)
 the last element\n");
 		return (NULL);
 	}
+	for (int i = 0; info->map[i]; i++)
+		printf("%s\n", info->map[i]);
+	if (check_map(info))
+		return (NULL);
 	tmp = *lst;
 	while (tmp)
 	{
