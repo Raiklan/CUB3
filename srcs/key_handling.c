@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleroy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:58:10 by aleroy            #+#    #+#             */
-/*   Updated: 2022/06/10 15:58:13 by aleroy           ###   ########.fr       */
+/*   Updated: 2022/06/13 19:13:04 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ int	handle_no_event(void)
 	return (0);
 }
 
-void destroyer(t_info *info)
+int destroyer(t_info *info)
 {
 	mlx_destroy_display(info->id);
 	free(info->id);
 	free(info->wd_ptr);
+	exit(0);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -72,6 +74,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	mlx_loop_hook(info.id, &handle_no_event, &info);
 	mlx_key_hook(info.wd_ptr, &handle_event, &info);
+	mlx_hook(info.wd_ptr, 33, 1L << 5, &destroyer, &info);
 	mlx_loop(info.id);
 	destroyer(&info);
 	return (0);

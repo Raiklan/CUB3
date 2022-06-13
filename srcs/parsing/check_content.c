@@ -6,17 +6,19 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/10 16:44:04 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/13 20:18:38 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_info	*init_info(void)
+t_info	*init_info(void)
 {
 	t_info	*info;
-
+	
 	if (check_malloc(&info, sizeof(t_info)))
+		return (NULL);
+	if (check_malloc(&info->lst, sizeof(t_list)))
 		return (NULL);
 	info->celling = NULL;
 	info->ea_path = NULL;
@@ -99,36 +101,23 @@ static int	suppress_space(t_list **lst)
 	return (0);
 }
 
-t_info	*check_content(t_list **lst)
+void	*check_content(t_info *info)
 {
-	t_info	*info;
-	t_list	*tmp;
-
-	info = init_info();
-	if (!info)
+	if (suppress_space(info->lst))
 		return (NULL);
-	if (suppress_space(lst))
-		return (NULL);
-	if (right_conf_for_cub(lst, info))
+	if (right_conf_for_cub(info->lst, info))
 	{
-		print_error("Missing an element for configuration or map isn't \
-the last element\n");
+		print_error("Bad configuration file ! Just bad man\n");
 		return (NULL);
 	}
 	for (int i = 0; info->map[i]; i++)
 		printf("%s\n", info->map[i]);
 	if (check_map(info))
 		return (NULL);
-	tmp = *lst;
-	while (tmp)
-	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
-	}
 	printf("%s\n%s\n%s\n%s\n%s\n%s\n", info->celling, info->ea_path, info->floor, info->no_path, info->so_path, info->we_path);
 	for (int i = 0; info->map[i]; i++)
 		printf("%s\n", info->map[i]);
-	ft_lstclear(lst, free);
+	ft_lstclear(info->lst, free);
 	free_info(info);
 	return (NULL);
 }

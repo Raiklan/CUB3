@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:26:38 by saich             #+#    #+#             */
-/*   Updated: 2022/05/30 20:51:38 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/13 20:18:26 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_cub_rights(char **av)
 
 /* List of all the content of file and verification there isn't 
 two instances of the same data*/
-int	get_info(char **av, t_list **lst)
+int	get_info(char **av, t_info	*info)
 {
 	int		fd;
 	char	*ret;
@@ -77,7 +77,7 @@ int	get_info(char **av, t_list **lst)
 		elem = ft_lstnew(ret);
 		if (!(elem))
 			return (print_error(strerror(errno)));
-		ft_lstadd_back(lst, elem);
+		ft_lstadd_back(info->lst, elem);
 		ret = get_next_line(fd);
 	}
 	return (0);
@@ -85,9 +85,11 @@ int	get_info(char **av, t_list **lst)
 
 int	main(int ac, char **av)
 {
-	t_list	*lst;
+	t_info	*info;
 	
-	lst = NULL;
+	info = init_info();
+	if (!info || !info->lst)
+		return (EXIT_FAILURE);
 	if (ac != 2)
 	{
 		print_error("Not enough arguments: you must include a .cub file for \
@@ -98,9 +100,9 @@ configuration of the map !\n");
 		return (EXIT_FAILURE);
 	if (check_cub_rights(av))
 		return (EXIT_FAILURE);
-	if (get_info(av, &lst))
+	if (get_info(av, info))
 		return (EXIT_FAILURE);
-	if (!check_content(&lst))
+	if (!check_content(info))
 		return (EXIT_FAILURE);
 	return (0);
 }

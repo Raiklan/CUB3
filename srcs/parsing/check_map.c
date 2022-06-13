@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/06/10 16:45:14 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/13 19:55:13 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,35 @@ static int	right_name(char *str, t_info *info)
 			return (-1);
 		flag = 1;
 	}
-	if (ft_strlen(str) > 2 && str[i] == 'S' && str[i + 1] == 'O')
+	if (!ft_strncmp(str, "SO", 2))
 	{
 		info->so_path = ft_substr(str, 2, ft_strlen(str));
 		if (!info->so_path)
 			return (-1);
 		flag = 1;
 	}
-	if (ft_strlen(str) > 2 && str[i] == 'W' && str[i + 1] == 'E')
+	if (!ft_strncmp(str, "WE", 2))
 	{
 		info->we_path = ft_substr(str, 2, ft_strlen(str));
 		flag = 1;
 		if (!info->we_path)
 			return (-1);
 	}
-	if (ft_strlen(str) > 2 && str[i] == 'E' && str[i + 1] == 'A')
+	if (!ft_strncmp(str, "EA", 2))
 	{
 		info->ea_path = ft_substr(str, 2, ft_strlen(str));
 		flag = 1;
 		if (!info->ea_path)
 			return (-1);
 	}
-	if (ft_strlen(str) > 2 && str[i] == 'F' && ft_isdigit(str[i + 1]))
+	if (!ft_strncmp(str, "F", 1) && str[i + 1] &&ft_isdigit(str[i + 1]))
 	{
 		info->floor = ft_substr(str, 1, ft_strlen(str));
 		flag = 1;
 		if (!info->floor)
 			return (-1);
 	}
-	if (ft_strlen(str) > 2 && str[i] == 'C' && ft_isdigit(str[i + 1]))
+	if (!ft_strncmp(str, "C", 1) && str[i + 1] && ft_isdigit(str[i + 1]))
 	{
 		info->celling = ft_substr(str, 1, ft_strlen(str));
 		flag = 1;
