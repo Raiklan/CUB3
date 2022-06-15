@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/13 20:18:38 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/15 18:53:12 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_info	*init_info(void)
 		return (NULL);
 	if (check_malloc(&info->lst, sizeof(t_list)))
 		return (NULL);
+	info->env.pos_dir = 0;
+	ft_bzero(&info->env, sizeof(info->env));
 	info->celling = NULL;
 	info->ea_path = NULL;
 	info->floor = NULL;
@@ -38,7 +40,15 @@ static char	*trim_nl(char *str)
 	int		i;
 	int		len;
 
-	if (check_malloc(&tmp, sizeof(char) * ft_strlen(str) + 1))
+	i = 0;
+	len = 0;
+	while (str[i])
+	{
+		if (str[i] != '\n')
+			len++;
+		i++;
+	}
+	if (check_malloc(&tmp, sizeof(char) * len + 1))
 		return (NULL);
 	i = 0;
 	len = 0;
@@ -110,14 +120,12 @@ void	*check_content(t_info *info)
 		print_error("Bad configuration file ! Just bad man\n");
 		return (NULL);
 	}
-	for (int i = 0; info->map[i]; i++)
-		printf("%s\n", info->map[i]);
-	if (check_map(info))
-		return (NULL);
+	printf("la\n");
+	parse_map(info->map, info);
+	printf("et ba non\n");
 	printf("%s\n%s\n%s\n%s\n%s\n%s\n", info->celling, info->ea_path, info->floor, info->no_path, info->so_path, info->we_path);
 	for (int i = 0; info->map[i]; i++)
 		printf("%s\n", info->map[i]);
-	ft_lstclear(info->lst, free);
 	free_info(info);
 	return (NULL);
 }

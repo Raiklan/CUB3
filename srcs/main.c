@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:26:38 by saich             #+#    #+#             */
-/*   Updated: 2022/06/13 20:18:26 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/15 17:40:21 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	get_info(char **av, t_info	*info)
 		ft_lstadd_back(info->lst, elem);
 		ret = get_next_line(fd);
 	}
+	close (fd);
 	return (0);
 }
 

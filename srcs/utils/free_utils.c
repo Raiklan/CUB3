@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:28:43 by saich             #+#    #+#             */
-/*   Updated: 2022/06/09 17:08:19 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/15 18:50:31 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void	free_info(t_info *info)
 	if (info->we_path)
 		free(info->we_path);
 	free_map(info->map);
+	ft_lstclear(info->lst, free);
+	free(info->lst);
 	free(info);
 }

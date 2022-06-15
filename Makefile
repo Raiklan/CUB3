@@ -10,12 +10,14 @@ SRCS =	srcs/main.c	\
 		srcs/parsing/empty_space.c \
 		srcs/parsing/check_map.c \
 		srcs/parsing/check_border.c \
-		srcs/utils/free_utils.c 
+		srcs/utils/free_utils.c \
+		srcs/parsing/check_space.c \
+		srcs/parsing/check_limit.c
 
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra #-Werror
 
 all :
 	@make bonus -C $(LIBFT)

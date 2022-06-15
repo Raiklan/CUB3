@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/06/13 19:55:13 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/15 18:12:22 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,14 @@ to get data from .cub\n"));
 			count++;
 		if (is_map(tmp->content))
 		{
+			ret = 2;
 			if (cpy_map(count, info, tmp))
 				return (EXIT_FAILURE);
 			break ;
 		}
 		tmp = tmp->next;
 	}
-	if (count != 6)
+	if (count != 6 || ret != 2)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -121,38 +122,9 @@ int	is_map(char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+	while (str[i] && (str[i] == ' '))
 		i++;
 	if (str[i] && str[i] == '1')
 		return (1);
-	return (0);
-}
-
-int	check_map(t_info *info)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (check_border_horiz(info->map[0]))
-		return (print_error("Top border of the map is not made of '1' and spaces\n")); // error
-	while(info->map[i])
-	{
-		j = 0;
-		if (check_first_wall(info->map[i]))
-			return (print_error("Map is not bounded by walls\n"));
-		while (info->map[i][j])
-		{
-			if (info->map[i][j] != '1' && info->map[i][j] != '0' && info->map[i][j] != 'N' \
-&& info->map[i][j] != 'S' && info->map[i][j] != 'W' && info->map[i][j] != 'E' && info->map[i][j] != ' ')
-				return (print_error("Character of the map can only be : 1, 0, N, E, S, W or spaces\n"));
-			j++;
-		}
-		if (check_last_wall(info->map[i], j - 1))
-			return (print_error("Map is not bounded by walls\n"));
-		i++;
-	}
-	if (check_border_horiz(info->map[i - 1]))
-		return (print_error("Bottom border of the map is not made of '1' and spaces\n"));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 16:19:22 by saich             #+#    #+#             */
-/*   Updated: 2022/06/13 20:04:39 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/14 19:42:33 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	check_first_wall(char *line)
 
 int	check_last_wall(char *line, int i)
 {
-	while (i >= 0 && line[i] == ' ')
-		i--;
+	i = ft_strlen(line);
+	while (i-- >= 0 && line[i] == ' ')
+		;
 	if (line[i] != '1')
 		return (1);
 	return (0);
