@@ -9,8 +9,8 @@ LEAK = -fsanitize=address
 all : $(NAME)
 
 $(NAME) :
-	cd ./mlx_linux && make && cd ..
-	$(CC) $(FLAGS) -D BUFFER_SIZE=1 $(SRCS) -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+# 	cd ./mlx_linux && make && cd ..
+	$(CC) $(FLAGS) -D BUFFER_SIZE=1 $(SRCS) -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm  -o $(NAME) #remove -lz after -lm
 
 leak :
 	$(CC) $(FLAGS) $(LEAK) -D BUFFER_SIZE=1 $(SRCS) -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o fdfleak

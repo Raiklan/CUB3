@@ -32,6 +32,22 @@ void draw_grid(t_info *info, t_img *tmp)
 	}
 }
 
+void	draw_pointer(t_info *info, t_img *tmp, int x, int y)
+{
+	int i;
+
+	i = 0;
+	info->color = 0xee82ee;
+	while (i < 20)
+	{
+		img_pix_put(info, tmp, x, y);
+		x += info->player.dirx;
+		y += info->player.diry;
+		i++;
+	}
+	info->color = 0xffffff;
+}
+
 void	draw_player(t_info *info, t_img *tmp)
 {
 	int		x;
@@ -56,6 +72,7 @@ void	draw_player(t_info *info, t_img *tmp)
 		col_count++;
 		x = info->player.x + info->tile_size / 3;
 	}
+	draw_pointer(info, tmp, info->player.x + info->tile_size / 2, info->player.y + info->tile_size / 2);
 }
 
 int	render(t_info *info, char **line)
@@ -86,7 +103,7 @@ int	render(t_info *info, char **line)
 			{
 				pixel_count = 0;
 				if (line[i][j] == '0')
-					info->color = 0x00ff00;
+					info->color = 0xbdb76b;
 				else if (line[i][j] == 'N' || line[i][j] == 'S' || line[i][j] == 'E' || line[i][j] == 'W')
 					info->color = 0x0000ff;
 				else if (line[i][j] == '\t' || line[i][j] == ' ')
@@ -109,7 +126,6 @@ int	render(t_info *info, char **line)
 	}
 	draw_grid(info, &tmp);
 	draw_player(info, &tmp);
-
 	if (info->img.img_ptr != NULL)
 	{
 		mlx_destroy_image(info->id, info->img.img_ptr);

@@ -89,6 +89,26 @@ char	**main_2(int argc, char **argv, t_info *info)
 			{
 				info->player.x = j * info->tile_size;
 				info->player.y = i * info->tile_size;
+				if (line[i][j] == 'N')
+				{
+					info->player.dirx = 0;
+					info->player.diry = -1;
+				}
+				else if (line[i][j] == 'S')
+				{
+					info->player.dirx = 0;
+					info->player.diry = 1;
+				}
+				else if (line[i][j] == 'E')
+				{
+					info->player.dirx = 1;
+					info->player.diry = 0;
+				}
+				else if (line[i][j] == 'W')
+				{
+					info->player.dirx = -1;
+					info->player.diry = 0;
+				}
 			}
 			j++;
 		}
