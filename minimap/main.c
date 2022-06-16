@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	img_pix_put(t_info *info, t_img *img, int x, int y)
 {
@@ -26,7 +27,7 @@ void	img_pix_put(t_info *info, t_img *img, int x, int y)
 	*(int *)pixel = info->color;
 }
 
-/*int	key_release(int key_sym, t_info *info)
+int	key_release(int key_sym, t_info *info)
 {
 	if (key_sym == XK_Escape)
 	{
@@ -50,6 +51,8 @@ void	img_pix_put(t_info *info, t_img *img, int x, int y)
 
 int	key_press(int key_sym, t_info *info)
 {
+	double oldx;
+
 	if (key_sym == XK_Escape)
 	{
 		mlx_destroy_window(info->id, info->wd_ptr);
@@ -57,36 +60,56 @@ int	key_press(int key_sym, t_info *info)
 	}
 	else if(key_sym == 0x77)//w
 	{
-		info->player.y -= info->tile_size / 3;
-		write(1, "w pressed\n", 10);
+		info->player.x += info->tile_size / 3 * info->player.dirx;
+		info->player.y += info->tile_size / 3 * info->player.diry;
+		write(1, "z pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x61)//a
 	{
-		info->player.x -= info->tile_size/3;
-		write(1, "a pressed\n", 10);
+		info->player.x += info->tile_size / 3 * info->player.diry;
+		info->player.y += info->tile_size / 3 * info->player.dirx * -1;
+		write(1, "q pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x73)//s
 	{
-		info->player.y += info->tile_size/3;
+		info->player.x -= info->tile_size / 3 * info->player.dirx;
+		info->player.y -= info->tile_size / 3 * info->player.diry;
 		write(1, "s pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x64)//d
 	{
-		info->player.x += info->tile_size/3;
+		info->player.x += info->tile_size / 3 * info->player.diry * -1;
+		info->player.y += info->tile_size / 3 * info->player.dirx;
 		write(1, "d pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0xff51)//left
+	{
+		//printf("dirx = %f, diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
+		oldx = info->player.dirx * -1;
+		info->player.dirx = info->player.diry;
+		info->player.diry = oldx;
+		//printf("after dirx = %f, after diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
 		write(1, "left pressed\n", 13);
+		render(info, info->line);
+	}
 	else if(key_sym == 0xff53)//right
+	{
+		//printf("dirx = %f, diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
+		oldx = info->player.dirx;
+		info->player.dirx = info->player.diry * -1;
+		info->player.diry = oldx;
+		//printf("after dirx = %f, after diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
 		write(1, "right pressed\n", 14);
+		render(info, info->line);
+	}
 	return (0);
-}*/
+}
 
-int	key_release(int key_sym, t_info *info)
+/*int	key_release(int key_sym, t_info *info)
 {
 	if (key_sym == XK_Escape)
 	{
@@ -110,6 +133,8 @@ int	key_release(int key_sym, t_info *info)
 
 int	key_press(int key_sym, t_info *info)
 {
+	double oldx;
+
 	if (key_sym == XK_Escape)
 	{
 		mlx_destroy_window(info->id, info->wd_ptr);
@@ -117,47 +142,54 @@ int	key_press(int key_sym, t_info *info)
 	}
 	else if(key_sym == 0x7a)//z
 	{
-		info->player.y -= info->tile_size / 3 + info->player.diry + info->player.dirx;
+		info->player.x += info->tile_size / 3 * info->player.dirx;
+		info->player.y += info->tile_size / 3 * info->player.diry;
 		write(1, "z pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x71)//q
 	{
-		info->player.x -= info->tile_size/3 + info->player.diry + info->player.dirx;
+		info->player.x += info->tile_size / 3 * info->player.diry;
+		info->player.y += info->tile_size / 3 * info->player.dirx * -1;
 		write(1, "q pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x73)//s
 	{
-		info->player.y += info->tile_size/3 + info->player.diry + info->player.dirx;
+		info->player.x -= info->tile_size / 3 * info->player.dirx;
+		info->player.y -= info->tile_size / 3 * info->player.diry;
 		write(1, "s pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x64)//d
 	{
-		info->player.x += info->tile_size/3 + info->player.diry + info->player.dirx;
+		info->player.x += info->tile_size / 3 * info->player.diry * -1;
+		info->player.y += info->tile_size / 3 * info->player.dirx;
 		write(1, "d pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0xff51)//left
 	{
-		info->player.dirx -= cos(info->player.dirx) - sin(info->player.dirx);
-		info->player.diry -= sin(info->player.diry) + cos(info->player.diry);
+		//printf("dirx = %f, diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
+		oldx = info->player.dirx * -1;
+		info->player.dirx = info->player.diry;
+		info->player.diry = oldx;
+		//printf("after dirx = %f, after diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
 		write(1, "left pressed\n", 13);
 		render(info, info->line);
 	}
 	else if(key_sym == 0xff53)//right
 	{
-		info->player.dirx += cos(info->player.dirx) - sin(info->player.dirx);
-		info->player.diry += sin(info->player.diry) + cos(info->player.diry);
+		//printf("dirx = %f, diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
+		oldx = info->player.dirx;
+		info->player.dirx = info->player.diry * -1;
+		info->player.diry = oldx;
+		//printf("after dirx = %f, after diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
 		write(1, "right pressed\n", 14);
 		render(info, info->line);
 	}
 	return (0);
-}
-
-//[ cos(a) -sin(a) ]
-//[ sin(a)  cos(a) ]
+}*/
 
 int	handle_no_event(void)
 {

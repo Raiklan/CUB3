@@ -62,8 +62,8 @@ typedef struct	s_player
 {
 	int x;
 	int y;
-	int dirx;
-	int diry;
+	double dirx;
+	double diry;
 }				t_player;
 
 typedef struct s_info
