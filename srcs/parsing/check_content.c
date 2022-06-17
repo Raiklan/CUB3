@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/15 18:53:12 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/17 17:09:10 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,7 @@ void	*check_content(t_info *info)
 		print_error("Bad configuration file ! Just bad man\n");
 		return (NULL);
 	}
-	printf("la\n");
 	parse_map(info->map, info);
-	printf("et ba non\n");
 	printf("%s\n%s\n%s\n%s\n%s\n%s\n", info->celling, info->ea_path, info->floor, info->no_path, info->so_path, info->we_path);
 	for (int i = 0; info->map[i]; i++)
 		printf("%s\n", info->map[i]);
