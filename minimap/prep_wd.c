@@ -91,24 +91,29 @@ char	**main_2(int argc, char **argv, t_info *info)
 				info->player.y = i * info->tile_size;
 				if (line[i][j] == 'N')
 				{
-					info->player.dirx = 0;
-					info->player.diry = -1;
+					info->player.angle = 3 * PI / 2;
+					info->player.dirx = cos(info->player.angle) * 5;
+					info->player.diry = sin(info->player.angle) * 5;
 				}
 				else if (line[i][j] == 'S')
 				{
-					info->player.dirx = 0;
-					info->player.diry = 1;
+					info->player.angle = PI / 2;
+					info->player.dirx = cos(info->player.angle) * 5;
+					info->player.diry = sin(info->player.angle) * 5;
 				}
 				else if (line[i][j] == 'E')
 				{
-					info->player.dirx = 1;
-					info->player.diry = 0;
+					info->player.angle = 0;
+					info->player.dirx = cos(info->player.angle) * 5;
+					info->player.diry = sin(info->player.angle) * 5;
 				}
 				else if (line[i][j] == 'W')
 				{
-					info->player.dirx = -1;
-					info->player.diry = 0;
+					info->player.angle = PI;
+					info->player.dirx = cos(info->player.angle) * 5;
+					info->player.diry = sin(info->player.angle) * 5;
 				}
+				line[i][j] = '0';
 			}
 			j++;
 		}

@@ -50,7 +50,7 @@ void	correct_axe(t_bre *bre)
 	}
 }
 
-void	bresenham_new(t_info *info, t_coor *coor)
+void	bresenham_new(t_info *info, t_img *tmp, t_coor *coor)
 {
 	t_bre	bre;
 	int		i;
@@ -61,7 +61,7 @@ void	bresenham_new(t_info *info, t_coor *coor)
 	bre.numerator = bre.longest / 2;
 	while (i <= bre.longest)
 	{
-		img_pix_put(info, &info->img, coor->xold, coor->yold);
+		img_pix_put(info, tmp, coor->xold, coor->yold);
 		bre.numerator += bre.shortest ;
 		if (!(bre.numerator < bre.longest))
 		{

@@ -21,6 +21,11 @@
 # include <math.h>
 # include "get_next_line.h"
 
+
+#include <stdio.h>
+
+#define PI 3.1415926535
+
 typedef struct s_bre
 {
 	int		width;
@@ -38,14 +43,8 @@ typedef struct s_coor
 {
 	int		x1;
 	int		y1;
-	int		z1;
-	int		_2dx1;
-	int		_2dy1;
 	int		xold;
 	int		yold;
-	int		zold;
-	int		_2dxold;
-	int		_2dyold;
 	int		tile_size;
 }				t_coor;
 
@@ -60,10 +59,11 @@ typedef struct s_img
 
 typedef struct	s_player
 {
-	int x;
-	int y;
-	double dirx;
-	double diry;
+	float x;
+	float y;
+	float dirx;
+	float diry;
+	float angle;
 }				t_player;
 
 typedef struct s_info
@@ -93,7 +93,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2, int i);
 
-void	bresenham_new(t_info *info, t_coor *coor);
+void	bresenham_new(t_info *info, t_img *tmp, t_coor *coor);
 
 void	clear_background(t_info *info, t_img *tmp);
 int		get_coor(t_coor *coor, char *line, int i, int *z);

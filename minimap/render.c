@@ -37,7 +37,7 @@ void	draw_pointer(t_info *info, t_img *tmp, int x, int y)
 	int i;
 
 	i = 0;
-	info->color = 0xee82ee;
+	info->color = 0xff0000;
 	while (i < 20)
 	{
 		img_pix_put(info, tmp, x, y);
@@ -50,6 +50,7 @@ void	draw_pointer(t_info *info, t_img *tmp, int x, int y)
 
 void	draw_player(t_info *info, t_img *tmp)
 {
+	t_coor	coor;
 	int		x;
 	int		y;
 	int		pixel_count;
@@ -72,14 +73,17 @@ void	draw_player(t_info *info, t_img *tmp)
 		col_count++;
 		x = info->player.x + info->tile_size / 3;
 	}
-	draw_pointer(info, tmp, info->player.x + info->tile_size / 2, info->player.y + info->tile_size / 2);
+	set_coor(info, &coor);
+	bresenham_new(info, tmp, &coor);
+	//draw_pointer(info, tmp, info->player.x + info->tile_size / 2, info->player.y + info->tile_size / 2);
 }
 
 int	render(t_info *info, char **line)
 {
-	t_coor	coor;
 	int		i;
 	int		j;
+	int x = 0;
+	int y = 0;
 	int		pixel_count;
 	int		col_count;
 	t_img	tmp;
@@ -89,7 +93,6 @@ int	render(t_info *info, char **line)
 	if (tmp.img_ptr == NULL)
 		return (destroyer(info, line));
 	tmp.addr = mlx_get_data_addr(tmp.img_ptr, &tmp.bpp, &tmp.line_len, &tmp.endian);
-	set_coor(info, &coor);
 	info->color = 0x0;
 	clear_background(info, &tmp);
 	info->color = 0xffffff;
@@ -112,15 +115,15 @@ int	render(t_info *info, char **line)
 					info->color = 0x696969;
 				while (pixel_count < info->tile_size)
 				{
-					img_pix_put(info, &tmp, coor.x1, coor.y1);
+					img_pix_put(info, &tmp, x, y);
 					pixel_count++;
-					coor.x1++;
+					x++;
 				}
 				j++;
 			}
-			coor.y1++;
+			y++;
 			col_count++;
-			coor.x1 = 0;
+			x = 0;
 		}
 		i++;
 	}
