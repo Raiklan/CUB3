@@ -141,36 +141,36 @@ int	key_press(int key_sym, t_info *info)
 	}
 	else if(key_sym == 0x7a)//z
 	{
-		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x + (int)info->player.dirx) / info->tile_size] == '0')
+		if (info->line[(int)info->player.y / info->tile_size][(int)(info->player.x + info->player.dirx) / info->tile_size] == '0')
 			info->player.x += info->player.dirx;
-		if (info->line[((int)info->player.y + (int)info->player.diry) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
+		if (info->line[(int)(info->player.y + info->player.diry) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
 			info->player.y += info->player.diry;
 		//write(1, "z pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x71)//q
 	{
-		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x + (int)info->player.diry) / info->tile_size] == '0')
+		if (info->line[(int)info->player.y / info->tile_size][(int)(info->player.x + info->player.diry) / info->tile_size] == '0')
 			info->player.x += info->player.diry;
-		if (info->line[((int)info->player.y + ((int)info->player.dirx * -1)) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
+		if (info->line[(int)(info->player.y + (info->player.dirx * -1)) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
 			info->player.y += info->player.dirx * -1;
 		//write(1, "q pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x73)//s
 	{
-		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x - (int)info->player.dirx) / info->tile_size] == '0')
+		if (info->line[(int)info->player.y / info->tile_size][(int)(info->player.x - info->player.dirx) / info->tile_size] == '0')
 			info->player.x -= info->player.dirx;
-		if (info->line[((int)info->player.y - (int)info->player.diry) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
+		if (info->line[(int)(info->player.y - info->player.diry) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
 			info->player.y -= info->player.diry;
 		//write(1, "s pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x64)//d
 	{
-		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x + ((int)info->player.diry * -1)) / info->tile_size] == '0')
+		if (info->line[(int)info->player.y / info->tile_size][(int)(info->player.x + (info->player.diry * -1)) / info->tile_size] == '0')
 			info->player.x += info->player.diry * -1;
-		if (info->line[((int)info->player.y + (int)info->player.dirx) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
+		if (info->line[(int)(info->player.y + info->player.dirx) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
 			info->player.y += info->player.dirx;
 		//write(1, "d pressed\n", 10);
 		render(info, info->line);
