@@ -87,8 +87,8 @@ char	**main_2(int argc, char **argv, t_info *info)
 		{
 			if (line[i][j] == 'N' || line[i][j] == 'S' || line[i][j] == 'E' || line[i][j] == 'W')
 			{
-				info->player.x = j * info->tile_size;
-				info->player.y = i * info->tile_size;
+				info->player.x = j * info->tile_size + info->tile_size / 2;
+				info->player.y = i * info->tile_size + info->tile_size / 2;
 				if (line[i][j] == 'N')
 				{
 					info->player.angle = 3 * PI / 2;

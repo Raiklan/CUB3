@@ -18,7 +18,7 @@ void draw_grid(t_info *info, t_img *tmp)
 	int	j;
 
 	j = 0;
-	info->color = 0xf08080;
+	info->color = 0xffffff;
 	while (j < info->wd_height)
 	{
 		i = 0;
@@ -51,7 +51,7 @@ void	draw_pointer(t_info *info, t_img *tmp, int x, int y)
 void	draw_player(t_info *info, t_img *tmp)
 {
 	t_coor	coor;
-	int		x;
+	/*int		x;
 	int		y;
 	int		pixel_count;
 	int		col_count;
@@ -72,13 +72,16 @@ void	draw_player(t_info *info, t_img *tmp)
 		y++;
 		col_count++;
 		x = info->player.x + info->tile_size / 3;
-	}
+	}*/
+	info->color = 0x0000ff;
 	set_coor(info, &coor);
 	bresenham_new(info, tmp, &coor);
+	info->color = 0xff0000;
+	img_pix_put(info, tmp, info->player.x, info->player.y);
 	//draw_pointer(info, tmp, info->player.x + info->tile_size / 2, info->player.y + info->tile_size / 2);
 }
 
-int	render(t_info *info, char **line)
+/*int	render(t_info *info, char **line)
 {
 	int		i;
 	int		j;
@@ -135,8 +138,70 @@ int	render(t_info *info, char **line)
 		info->img.img_ptr = NULL;
 	}
 	info->img.img_ptr = tmp.img_ptr;
-	write (1, "here\n", 5);
-
 	mlx_put_image_to_window(info->id, info->wd_ptr, info->img.img_ptr, 0, 0);
 	return (0);
+}*/
+
+int    render(t_info *info, char **line)
+{
+    int        i;
+    int        j;
+    int x = 0;
+    int y = 0;
+    int        pixel_count;
+    int        col_count;
+    t_img    tmp;
+
+    i = 0;
+    tmp.img_ptr = mlx_new_image(info->id, info->wd_width, info->wd_height);
+    if (tmp.img_ptr == NULL)
+        return (destroyer(info, line));
+    tmp.addr = mlx_get_data_addr(tmp.img_ptr, &tmp.bpp, &tmp.line_len, &tmp.endian);
+    info->color = 0x0;
+    clear_background(info, &tmp);
+    while (line[i])
+    {
+        col_count = 0;
+        while (col_count < info->tile_size)
+        {
+            j = 0;
+            while (line[i][j])
+            {
+                pixel_count = 0;
+                while (pixel_count < info->tile_size)
+                {
+                    if (pixel_count == 0 || col_count == 0)
+                        info->color = 0x0;
+                    else if (pixel_count + 1 == info->tile_size || col_count + 1 == info->tile_size)
+                    	info->color = 0xffffff;
+                    else if (line[i][j] == '0')
+                        info->color = 0xbdb76b;
+                    else if (line[i][j] == '\t' || line[i][j] == ' ')
+                        info->color = 0xcccccc;//{ "grey80" , 0xcccccc },
+                    else
+                        info->color = 0x696969;
+                    img_pix_put(info, &tmp, x, y);
+                    pixel_count++;
+                    x++;
+                }
+                j++;
+            }
+            y++;
+            col_count++;
+            x = 0;
+        }
+        i++;
+    }
+    //draw_grid(info, &tmp);
+    draw_player(info, &tmp);
+    if (info->img.img_ptr != NULL)
+    {
+        mlx_destroy_image(info->id, info->img.img_ptr);
+        info->img.img_ptr = NULL;
+    }
+    info->img.img_ptr = tmp.img_ptr;
+    write (1, "here\n", 5);
+
+    mlx_put_image_to_window(info->id, info->wd_ptr, info->img.img_ptr, 0, 0);
+    return (0);
 }

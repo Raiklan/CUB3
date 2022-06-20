@@ -132,6 +132,8 @@ int	key_release(int key_sym, t_info *info)
 
 int	key_press(int key_sym, t_info *info)
 {
+	printf("dirx = %f, diry = %f\n", info->player.dirx ,info->player.diry);
+	printf("x = %f, y = %f\n", info->player.x / info->tile_size ,info->player.y / info->tile_size);
 	if (key_sym == XK_Escape)
 	{
 		mlx_destroy_window(info->id, info->wd_ptr);
@@ -139,61 +141,80 @@ int	key_press(int key_sym, t_info *info)
 	}
 	else if(key_sym == 0x7a)//z
 	{
-		//printf("x = %d  y = %d    line = '%c'\n", (int)info->player.x / info->tile_size + (int)info->player.dirx, (int)info->player.y / info->tile_size, info->line[(int)info->player.y / info->tile_size][(int)info->player.x / info->tile_size + (int)info->player.dirx]);
-		//if (info->line[(int)info->player.y / info->tile_size][(int)info->player.x / info->tile_size + (int)info->player.dirx] == '0')
+		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x + (int)info->player.dirx) / info->tile_size] == '0')
 			info->player.x += info->player.dirx;
-		//if (info->line[(int)info->player.y / info->tile_size + (int)info->player.diry][(int)info->player.x / info->tile_size] == '0')
+		if (info->line[((int)info->player.y + (int)info->player.diry) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
 			info->player.y += info->player.diry;
-		write(1, "z pressed\n", 10);
+		//write(1, "z pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x71)//q
 	{
-		info->player.x += info->player.diry;
-		info->player.y += info->player.dirx * -1;
-		write(1, "q pressed\n", 10);
+		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x + (int)info->player.diry) / info->tile_size] == '0')
+			info->player.x += info->player.diry;
+		if (info->line[((int)info->player.y + ((int)info->player.dirx * -1)) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
+			info->player.y += info->player.dirx * -1;
+		//write(1, "q pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x73)//s
 	{
-		//if (info->line[(int)info->player.y / info->tile_size][(int)info->player.x / info->tile_size - (int)info->player.dirx] == '0')
+		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x - (int)info->player.dirx) / info->tile_size] == '0')
 			info->player.x -= info->player.dirx;
-		//if (info->line[(int)info->player.y / info->tile_size - (int)info->player.diry][(int)info->player.x / info->tile_size] == '0')
+		if (info->line[((int)info->player.y - (int)info->player.diry) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
 			info->player.y -= info->player.diry;
-		write(1, "s pressed\n", 10);
+		//write(1, "s pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0x64)//d
 	{
-		info->player.x += info->player.diry * -1;
-		info->player.y += info->player.dirx;
-		write(1, "d pressed\n", 10);
+		if (info->line[(int)info->player.y / info->tile_size][((int)info->player.x + ((int)info->player.diry * -1)) / info->tile_size] == '0')
+			info->player.x += info->player.diry * -1;
+		if (info->line[((int)info->player.y + (int)info->player.dirx) / info->tile_size][(int)info->player.x / info->tile_size] == '0')
+			info->player.y += info->player.dirx;
+		//write(1, "d pressed\n", 10);
 		render(info, info->line);
 	}
 	else if(key_sym == 0xff51)//left
 	{
-		//printf("dirx = %f, diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
 		info->player.angle -= 0.1;
 		if (info->player.angle < 0)
 			info->player.angle += 2 * PI;
 		info->player.dirx = cos(info->player.angle) * 5;
 		info->player.diry = sin(info->player.angle) * 5;
-		//printf("after dirx = %f, after diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
-		write(1, "left pressed\n", 13);
+		//write(1, "left pressed\n", 13);
 		render(info, info->line);
 	}
 	else if(key_sym == 0xff53)//right
 	{
-		//printf("dirx = %f, diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
 		info->player.angle += 0.1;
 		if (info->player.angle > 2 * PI) 
 			info->player.angle -= 2 * PI;
 		info->player.dirx = cos(info->player.angle) * 5;
 		info->player.diry = sin(info->player.angle) * 5;
-		//printf("after dirx = %f, after diry = %f\n", info->player.dirx = info->player.dirx ,info->player.diry);
-		write(1, "right pressed\n", 14);
+		//write(1, "right pressed\n", 14);
 		render(info, info->line);
 	}
+	printf("after dirx = %f, after diry = %f\n\n", info->player.dirx ,info->player.diry);
+	int x;
+	int y =0;
+	while (info->line[y])
+	{
+		x =0;
+		while (info->line[y][x])
+		{
+			if ((int)info->player.y / info->tile_size == y && ((int)info->player.x / info->tile_size) == x)
+				write(1, "P", 1);
+			else
+				write(1, &info->line[y][x], 1);
+			x++;
+		}
+		write(1, "\n", 1);
+		y++;
+	}
+	write(1, "\n", 1);
+	write(1, "--------------------------------------------------------------------------------\n", 81);
+	write(1, "\n", 1);
 	return (0);
 }
 
@@ -249,7 +270,6 @@ int	main(int argc, char **argv)
 			"fdf" );
 	if (info.wd_ptr == NULL)
 		return (-1);
-
 	if (render(&info, line) == -1)
 		return (destroyer(&info, line));
 	mlx_loop_hook(info.id, &handle_no_event, &info);
