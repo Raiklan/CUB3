@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/17 17:09:10 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/20 20:50:24 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 t_info	*init_info(void)
 {
 	t_info	*info;
-	
+
 	if (check_malloc(&info, sizeof(t_info)))
 		return (NULL);
 	if (check_malloc(&info->lst, sizeof(t_list)))
 		return (NULL);
 	info->env.pos_dir = 0;
 	ft_bzero(&info->env, sizeof(info->env));
-	info->celling = NULL;
-	info->ea_path = NULL;
-	info->floor = NULL;
+	info->texture.celling = NULL;
+	info->texture.ea_path = NULL;
+	info->texture.floor = NULL;
 	info->map = NULL;
-	info->no_path = NULL;
-	info->so_path = NULL;
-	info->we_path = NULL;
+	info->texture.no_path = NULL;
+	info->texture.so_path = NULL;
+	info->texture.we_path = NULL;
 	info->str = NULL;
-	info->next = NULL;
 	return (info);
 }
 
@@ -121,9 +120,14 @@ void	*check_content(t_info *info)
 		return (NULL);
 	}
 	parse_map(info->map, info);
-	printf("%s\n%s\n%s\n%s\n%s\n%s\n", info->celling, info->ea_path, info->floor, info->no_path, info->so_path, info->we_path);
-	for (int i = 0; info->map[i]; i++)
-		printf("%s\n", info->map[i]);
+	/* if (check_rgb(info->texture.celling, 1, info->texture) || \
+check_rgb(info->texture.celling, 1, info->texture)) */
+		return (NULL);
 	free_info(info);
 	return (NULL);
 }
+
+	/* printf("%s\n%s\n%s\n%s\n%s\n%s\n", info->celling, info->ea_path, 
+	info->floor, info->no_path, info->so_path, info->we_path);
+	for (int i = 0; info->map[i]; i++)
+		printf("%s\n", info->map[i]); */

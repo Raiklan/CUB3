@@ -6,11 +6,62 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 22:48:24 by saich             #+#    #+#             */
-/*   Updated: 2022/05/25 23:48:22 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/20 19:26:28 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_map(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] && (str[i] == ' '))
+		i++;
+	if (str[i] && str[i] == '1')
+		return (1);
+	return (0);
+}
+
+int	map_length(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i - 1);
+}
+
+void	get_pos(char **map, t_info *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
+			{
+				if (info->env.pos_dir == 0)
+				{
+					info->env.pos_dir = map[i][j];
+					info->env.pos_coor[0] = i;
+					info->env.pos_coor[1] = j;
+				}
+				else if (info->env.pos_dir != 0)
+					display_error("position already set", EXIT_FAILURE, info);
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 int	empty_space_line(t_list *lst)
 {
