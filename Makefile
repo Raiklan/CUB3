@@ -12,7 +12,9 @@ SRCS =	srcs/main.c	\
 		srcs/parsing/check_border.c \
 		srcs/utils/free_utils.c \
 		srcs/parsing/check_space.c \
-		srcs/parsing/check_limit.c
+		srcs/parsing/check_limit.c \
+		srcs/parsing/error.c \
+		srcs/parsing/check_rgb.c
 
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o
