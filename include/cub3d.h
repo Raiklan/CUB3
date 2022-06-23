@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/06/20 20:52:10 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/23 20:10:21 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 typedef struct	s_env
 {
-	char	pos_dir;
-	int		pos_coor[2];
+	char		pos_dir;
+	int			pos_coor[2];
 }				t_env;
 
 typedef struct	s_texture
@@ -39,14 +39,14 @@ typedef struct	s_texture
 	char		*celling;
 }				t_texture;
 
-typedef struct		s_info
+typedef struct	s_info
 {
-	t_list			**lst;
-	t_env			env;
-	t_texture		texture;
-	char			*str;
-	char			**map;
-}					t_info;
+	t_list		**lst;
+	t_env		env;
+	t_texture	*texture;
+	char		*str;
+	char		**map;
+}				t_info;
 
 			/* Parsing of the .cub file */
 int		print_error(char *str);
@@ -63,7 +63,7 @@ int		check_last_wall(char *line, int i);
 t_info	*init_info(void);
 
 //free_utils.c
-void	free_info(t_info *info);
+void	*free_info(t_info *info);
 int		count_lst(t_list *lst);
 
 //check_spaces.c
@@ -74,13 +74,12 @@ int		map_length(char **map);
 
 //check_limit.c
 void	parse_map(char **map, t_info *info);
-void	handle_error(int ret, t_info *info);
-void	display_error(char *msg, int code, t_info *info);
 
 //error.c
 void	handle_error(int ret, t_info *info);
-void	display_error(char *msg, int code, t_info *info);
+void	*display_error(char *msg, int code, t_info *info);
 
 //check_rgc.c
-int	check_rgb(char *str, int type, t_texture text);
+int		check_rgb(char *str, int type, t_texture *text);
+void	init_rgb(t_texture *texture);
 #endif

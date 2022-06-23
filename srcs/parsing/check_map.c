@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/06/20 20:40:53 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/23 19:20:46 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static int	right_name3(char *str, t_info *info)
 {
 	if (!ft_strncmp(str, "WE", 2))
 	{
-		info->texture.we_path = ft_substr(str, 2, ft_strlen(str));
-		if (!info->texture.we_path)
+		info->texture->we_path = ft_substr(str, 2, ft_strlen(str));
+		if (!info->texture->we_path)
 			return (-1);
 		return (1);
 	}
 	if (!ft_strncmp(str, "C", 1) && str[1] && ft_isdigit(str[1]))
 	{
-		info->texture.celling = ft_substr(str, 1, ft_strlen(str));
-		if (!info->texture.celling)
+		info->texture->celling = ft_substr(str, 1, ft_strlen(str));
+		if (!info->texture->celling)
 			return (-1);
 		return (1);
 	}
@@ -38,16 +38,16 @@ static int	right_name2(char *str, t_info *info)
 	ret = 0;
 	if (!ft_strncmp(str, "EA", 2))
 	{
-		info->texture.ea_path = ft_substr(str, 2, ft_strlen(str));
+		info->texture->ea_path = ft_substr(str, 2, ft_strlen(str));
 		ret = 1;
-		if (!info->texture.ea_path)
+		if (!info->texture->ea_path)
 			return (-1);
 	}
 	if (!ft_strncmp(str, "F", 1) && str[1] && ft_isdigit(str[1]))
 	{
-		info->texture.floor = ft_substr(str, 1, ft_strlen(str));
+		info->texture->floor = ft_substr(str, 1, ft_strlen(str));
 		ret = 1;
-		if (!info->texture.floor)
+		if (!info->texture->floor)
 			return (-1);
 	}
 	if (!ret)
@@ -60,15 +60,15 @@ static int	right_name(char *str, t_info *info, int flag)
 	flag = 0;
 	if (!ft_strncmp(str, "NO", 2))
 	{
-		info->texture.no_path = ft_substr(str, 2, ft_strlen(str));
-		if (!info->texture.no_path)
+		info->texture->no_path = ft_substr(str, 2, ft_strlen(str));
+		if (!info->texture->no_path)
 			return (-1);
 		flag = 1;
 	}
 	if (!ft_strncmp(str, "SO", 2))
 	{
-		info->texture.so_path = ft_substr(str, 2, ft_strlen(str));
-		if (!info->texture.so_path)
+		info->texture->so_path = ft_substr(str, 2, ft_strlen(str));
+		if (!info->texture->so_path)
 			return (-1);
 		flag = 1;
 	}

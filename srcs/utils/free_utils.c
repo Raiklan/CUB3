@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:28:43 by saich             #+#    #+#             */
-/*   Updated: 2022/06/15 18:50:31 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/23 19:22:26 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,24 @@ int	count_lst(t_list *lst)
 	return (i);
 }
 
-void	free_info(t_info *info)
+void	*free_info(t_info *info)
 {
-	if (info->celling)
-		free(info->celling);
-	if (info->ea_path)
-		free(info->ea_path);
-	if (info->floor)
-		free(info->floor);
-	if (info->no_path)
-		free(info->no_path);
-	if (info->so_path)
-		free(info->so_path);
-	if (info->we_path)
-		free(info->we_path);
+	if (info->texture->celling)
+		free(info->texture->celling);
+	if (info->texture->ea_path)
+		free(info->texture->ea_path);
+	if (info->texture->floor)
+		free(info->texture->floor);
+	if (info->texture->no_path)
+		free(info->texture->no_path);
+	if (info->texture->so_path)
+		free(info->texture->so_path);
+	if (info->texture->we_path)
+		free(info->texture->we_path);
+	free(info->texture);
 	free_map(info->map);
 	ft_lstclear(info->lst, free);
 	free(info->lst);
 	free(info);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/20 20:50:24 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/23 21:19:48 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ t_info	*init_info(void)
 		return (NULL);
 	info->env.pos_dir = 0;
 	ft_bzero(&info->env, sizeof(info->env));
-	info->texture.celling = NULL;
-	info->texture.ea_path = NULL;
-	info->texture.floor = NULL;
+	if (check_malloc(&info->texture, sizeof(t_texture)))
+		return (NULL);
+	ft_bzero(info->texture, sizeof(t_texture));
+	info->texture->celling = NULL;
+	info->texture->ea_path = NULL;
+	info->texture->floor = NULL;
 	info->map = NULL;
-	info->texture.no_path = NULL;
-	info->texture.so_path = NULL;
-	info->texture.we_path = NULL;
+	info->texture->no_path = NULL;
+	info->texture->so_path = NULL;
+	info->texture->we_path = NULL;
 	info->str = NULL;
 	return (info);
 }
@@ -113,16 +116,16 @@ static int	suppress_space(t_list **lst)
 void	*check_content(t_info *info)
 {
 	if (suppress_space(info->lst))
-		return (NULL);
+		return (free_info(info));
 	if (right_conf_for_cub(info->lst, info))
 	{
-		print_error("Bad configuration file ! Just bad man\n");
-		return (NULL);
+		display_error("Bad configuration file ! Just bad man", 1, info);
+		return (free_info(info));
 	}
 	parse_map(info->map, info);
-	/* if (check_rgb(info->texture.celling, 1, info->texture) || \
-check_rgb(info->texture.celling, 1, info->texture)) */
-		return (NULL);
+	init_rgb(info->texture);
+	if (check_rgb(info->texture->floor, 0, info->texture) || check_rgb(info->texture->celling, 1, info->texture))
+		display_error("Rgb is not the right format", 1, info);
 	free_info(info);
 	return (NULL);
 }

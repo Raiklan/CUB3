@@ -6,13 +6,13 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:53:16 by saich             #+#    #+#             */
-/*   Updated: 2022/06/20 18:54:38 by saich            ###   ########.fr       */
+/*   Updated: 2022/06/23 19:25:38 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	display_error(char *msg, int code, t_info *info)
+void	*display_error(char *msg, int code, t_info *info)
 {
 	if (code != 0)
 		printf("Error\n");
