@@ -30,12 +30,11 @@ void	clear_background(t_info *info, t_img *tmp)
 	}
 }
 
-void	set_coor(t_info *info, t_coor *coor)
+/*void	set_coor(t_info *info, t_coor *coor)
 {
 	coor->tile_size = info->tile_size;
 	coor->x1 = info->player.x + info->player.dirx * 5;
 	coor->y1 = info->player.y + info->player.diry * 5;
 	coor->xold = info->player.x;
 	coor->yold = info->player.y;
-	//printf("x1 = %d | y1 = %d | xold = %d | yold = %d\n", coor->x1, coor->y1 ,coor->xold ,coor->yold);
-}
+}*/
