@@ -19,12 +19,14 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <math.h>
+# include <stdbool.h>
 # include "get_next_line.h"
 
 
 #include <stdio.h>
 
 #define PI 3.1415926535
+#define DEGREE 0.0174533   //one degree in radian form
 
 typedef struct s_bre
 {

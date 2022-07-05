@@ -1,7 +1,7 @@
 
 #include "fdf.h"
 
-int	key_release(int key_sym, t_info *info)
+/*int	key_release(int key_sym, t_info *info)
 {
 	if (key_sym == XK_Escape)
 	{
@@ -123,13 +123,13 @@ int	key_press(int key_sym, t_info *info)
 	write(1, "--------------------------------------------------------------------------------\n", 81);
 	write(1, "\n", 1);
 	return (0);
-}
+}*/
 
 
 
 
 
-/*int	key_release(int key_sym, t_info *info)
+int	key_release(int key_sym, t_info *info)
 {
 	if (key_sym == XK_Escape)
 	{
@@ -251,7 +251,7 @@ int	key_press(int key_sym, t_info *info)
 	write(1, "--------------------------------------------------------------------------------\n", 81);
 	write(1, "\n", 1);
 	return (0);
-}*/
+}
 
 int	handle_no_event(void)
 {
