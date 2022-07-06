@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:52 by saich             #+#    #+#             */
-/*   Updated: 2022/06/23 21:35:52 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/06 19:39:10 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_rgb(t_texture *texture)
 	texture->f_rgb[2] = -1;
 }
 
-static int	check_int(t_texture *texture)
+static int	check_int255(t_texture *texture)
 {
 	int	i;
 
@@ -43,19 +43,45 @@ static int	check_int(t_texture *texture)
 	return (0);
 }
 
-int	check_rgb(char *str, int type, t_texture *texture)
+static int	get_rgb_floor(t_texture *texture, char *str)
 {
 	int		i;
-	int		start;
-	int		count;
 	char	*tmp;
+	int		start;
+	int		j;
 
 	i = 0;
-	count = 0;
+	j = 0;
 	start = 0;
-	if (ft_strlen(str) > 10)
-		return (1);
-	while (count < 3)
+	while (str[i])
+	{
+		while (str[i] && ft_isdigit(str[i]))
+			i++;
+		if (str[i] != '\0' && str[i] != ',')
+			return (1);
+		if (check_malloc(&tmp, sizeof(char) * i + 1))
+			return (1);
+		ft_strncpy(tmp, str + start, i - start);
+		texture->f_rgb[j] = ft_atoi(tmp);
+		start = i + 1;
+		i = start;
+		j++;
+		free(tmp);
+	}
+	return (0);
+}
+
+static int	get_rgb_ceil(t_texture *texture, char *str)
+{
+	int		i;
+	char	*tmp;
+	int		start;
+	int		j;
+
+	i = 0;
+	j = 0;
+	start = 0;
+	while (str[i])
 	{
 		while (str[i] && ft_isdigit(str[i]))
 			i++;
@@ -64,50 +90,22 @@ int	check_rgb(char *str, int type, t_texture *texture)
 		if (check_malloc(&tmp, sizeof(char) * i + 1))
 			return (1);
 		ft_strncpy(tmp, str + start, i);
+		texture->c_rgb[j] = ft_atoi(tmp);
 		start = i + 1;
 		i = start;
-		if (type)
-		{
-			if (texture->c_rgb[0] == -1)
-			{
-				count++;
-				texture->c_rgb[0] = ft_atoi(tmp);
-			}
-			else if (texture->c_rgb[1] == -1)
-			{
-				count++;
-				texture->c_rgb[1] = ft_atoi(tmp);
-			}
-			else if (texture->c_rgb[2] == -1)
-			{
-				count++;
-				texture->c_rgb[2] = ft_atoi(tmp);
-			}
-		}
-		else
-		{
-			if (texture->f_rgb[0] == -1)
-			{
-				count++;
-				texture->f_rgb[0] = ft_atoi(tmp);
-			}
-			else if (texture->f_rgb[1] == -1)
-			{
-				count++;
-				texture->f_rgb[1] = ft_atoi(tmp);
-			}
-			else if (texture->f_rgb[2] == -1)
-			{
-				count++;
-				texture->f_rgb[2] = ft_atoi(tmp);
-			}
-			if (count < 3 && !str[i - 1])
-				return (1);
-		}
+		j++;
 		free(tmp);
 	}
-	if (check_int(texture))
+	return (0);
+}
+
+int	check_rgb(char *str_c, char *str_f, t_texture *texture)
+{
+	if (ft_strlen(str_c) > 11 || ft_strlen(str_f) > 11)
 		return (1);
-	printf("c_rgb:%i,%i,%i , f_rgb:%i,%i,%i\n", texture->c_rgb[0], texture->c_rgb[1], texture->c_rgb[2], texture->f_rgb[0], texture->f_rgb[1], texture->f_rgb[2]);
+	if (get_rgb_floor(texture, str_f) || get_rgb_ceil(texture, str_c))
+		return (1);
+	if (check_int255(texture))
+		return (1);
 	return (0);
 }

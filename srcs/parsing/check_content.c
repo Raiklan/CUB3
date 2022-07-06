@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/06/23 21:19:48 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/06 19:30:01 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	*check_content(t_info *info)
 	}
 	parse_map(info->map, info);
 	init_rgb(info->texture);
-	if (check_rgb(info->texture->floor, 0, info->texture) || check_rgb(info->texture->celling, 1, info->texture))
+	if (check_rgb(info->texture->floor, info->texture->celling, info->texture))
 		display_error("Rgb is not the right format", 1, info);
 	free_info(info);
 	return (NULL);
