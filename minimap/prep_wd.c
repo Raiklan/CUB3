@@ -41,27 +41,6 @@ char	**prep_line(int fd, char *buf, char *line, char *tmp)
 	return (split);
 }
 
-// int	get_z(char *line, int i, int *z)
-// {
-// 	int	temp;
-
-// 	while (line[i] == ' ' && line[i])
-// 		i++;
-// 	if (!((line[i] == '-' || line[i] == '+' || (line[i] >= '0'
-// 					&& line[i] <= '9')) && line[i]))
-// 		return (-1);
-// 	temp = ft_atoi(&line[i]);
-// 	if (temp > *z)
-// 		*z = temp;
-// 	while ((line[i] == '-' || line[i] == '+') && line[i])
-// 		i++;
-// 	while (line[i] >= '0' && line[i] <= '9' && line[i])
-// 		i++;
-// 	while ((line[i] == ',' || line[i] == ' ' || line[i] == '\n') && line[i])
-// 		i++;
-// 	return (i);
-// }
-
 char	**main_2(int argc, char **argv, t_info *info)
 {
 	int		fd;
