@@ -25,7 +25,7 @@ void	draw_player(t_info *info, t_img *tmp)
 	int stepx;
 	int stepy;
 	bool wall_hit;
-	//bool side;
+	bool side;
 
 	t_coor	coor;
 
@@ -91,24 +91,33 @@ void	draw_player(t_info *info, t_img *tmp)
 			{
 				le_restex += next_full_x;
 				rayx += stepx;
-				//side = 0;//check angle too to know what wall was hit NSEW
+				side = 0;//x side
 			}
 			else
 			{
 				le_restey += next_full_y;
 				rayy += stepy;
-				//side = 1;//check angle too to know what wall was hit NSEW
+				side = 1;// y side
 			}
 			if (info->line[rayy/ info->tile_size][rayx/ info->tile_size] == '1')
 				wall_hit = 1;
 		}
+
+
+		if (side == 1 && rangle >= (5 * PI) / 4 && rangle <= (7 * PI) / 4)
+			printf("N\n");
+		else if (side == 1 && rangle >= PI / 4 && rangle <= (3 * PI) / 4)
+			printf("S\n");
+		else if (side == 0 && rangle >= PI / 2 && rangle <= (3 * PI) / 2)
+			printf("W\n");
+		else
+			printf("E\n");
 
 		rays++;
 		coor.x1 = rayx;
 		coor.y1 = rayy;
 		coor.xold = info->player.x;
 		coor.yold = info->player.y;
-		write(1, "here\n", 5);
 		bresenham_new(info, tmp, &coor);
 		rangle += DEGREE;
 	}
