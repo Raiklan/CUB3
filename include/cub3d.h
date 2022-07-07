@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/06/23 20:10:21 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/06 19:29:24 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	handle_error(int ret, t_info *info);
 void	*display_error(char *msg, int code, t_info *info);
 
 //check_rgc.c
-int		check_rgb(char *str, int type, t_texture *text);
+int		check_rgb(char *str_c, char *str_f, t_texture *text);
 void	init_rgb(t_texture *texture);
 #endif
