@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:28:43 by saich             #+#    #+#             */
-/*   Updated: 2022/06/23 19:22:26 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/07 19:49:40 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,18 @@ int	count_lst(t_list *lst)
 
 void	*free_info(t_info *info)
 {
-	if (info->texture->celling)
-		free(info->texture->celling);
-	if (info->texture->ea_path)
-		free(info->texture->ea_path);
-	if (info->texture->floor)
-		free(info->texture->floor);
-	if (info->texture->no_path)
-		free(info->texture->no_path);
-	if (info->texture->so_path)
-		free(info->texture->so_path);
-	if (info->texture->we_path)
-		free(info->texture->we_path);
-	free(info->texture);
+	if (info->env.celling)
+		free(info->env.celling);
+	if (info->env.wall_ea.path)
+		free(info->env.wall_ea.path);
+	if (info->env.floor)
+		free(info->env.floor);
+	if (info->env.wall_so.path)
+		free(info->env.wall_so.path);
+	if (info->env.wall_we.path)
+		free(info->env.wall_we.path);
+	if (info->env.wall_no.path)
+		free(info->env.wall_no.path);
 	free_map(info->map);
 	ft_lstclear(info->lst, free);
 	free(info->lst);

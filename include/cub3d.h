@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/06 19:29:24 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/07 19:50:52 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,62 @@
 # include "get_next_line.h"
 # include <string.h>
 # include <errno.h>
+# include <math.h>
+# include "../mlx_linux/mlx.h"
+# include "../mlx_linux/mlx_int.h"
 
-typedef struct	s_env
+typedef struct s_resolution
+{
+	int	x;
+	int	y;
+}				t_resolution;
+
+typedef struct s_texture
+{
+	char			*path;
+	int				h;
+	int				w;
+	unsigned int	*tex_addr;
+	void			*tex_ptr;
+	int				size_line;
+	int				bpp;
+	int				endian;
+}				t_texture;
+
+typedef struct s_env
 {
 	char		pos_dir;
 	int			pos_coor[2];
+	t_texture	wall_we;
+	t_texture	wall_ea;
+	t_texture	wall_so;
+	t_texture	wall_no;
+	char		*celling;
+	char		*floor;
+	int			color_ceil;
+	int			color_floor;
 }				t_env;
 
-typedef struct	s_texture
+typedef struct s_mlx
 {
-	int			f_rgb[3];
-	int			c_rgb[3];
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	char		*floor;
-	char		*celling;
-}				t_texture;
+	void			*mlx_window;
+	void			*mlx_ptr;
+	void			*img_ptr;
+	unsigned int	*img_addr;
+	void			*win_ptr;
+	int				bpp;
+	int				size_line;
+	int				endian;
+}	t_mlx;
 
-typedef struct	s_info
+typedef struct s_info
 {
-	t_list		**lst;
-	t_env		env;
-	t_texture	*texture;
-	char		*str;
-	char		**map;
-}				t_info;
+	t_list			**lst;
+	t_env			env;
+	t_mlx			mlx;
+	t_resolution	resolution;
+	char			**map;
+}					t_info;
 
 			/* Parsing of the .cub file */
 int		print_error(char *str);
@@ -79,7 +108,10 @@ void	parse_map(char **map, t_info *info);
 void	handle_error(int ret, t_info *info);
 void	*display_error(char *msg, int code, t_info *info);
 
-//check_rgc.c
+//check_rgb.c
 int		check_rgb(char *str_c, char *str_f, t_texture *text);
 void	init_rgb(t_texture *texture);
+int		parse_color(t_info *info, char *line, int ret);
+int		get_color(int r, int g, int b, t_info *info);
+
 #endif

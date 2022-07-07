@@ -1,7 +1,7 @@
 NAME = cub3d
 
 LIBFT = libft/
-LIB =
+LIB =  -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm
 
 SRCS =	srcs/main.c	\
 		srcs/utils/get_next_line.c \
@@ -29,7 +29,7 @@ all :
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I include/
 
 $(NAME)	: $(OBJ)
-	$(CC) $(CFLAGS) -I libft/ -I include/ $(OBJ) libft/libft.a -o $(NAME) $(LIB)
+	$(CC) $(CFLAGS) -I libft/ -I include/ -I mlx_linux/ $(OBJ) libft/libft.a -o $(NAME) $(LIB)
 
 key :#a retirer
 	cd ./mlx_linux && make && cd ..

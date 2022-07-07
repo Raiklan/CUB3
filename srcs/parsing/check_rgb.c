@@ -6,13 +6,13 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:52 by saich             #+#    #+#             */
-/*   Updated: 2022/07/06 19:39:10 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/07 19:51:17 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_rgb(t_texture *texture)
+/* void	init_rgb(t_texture *texture)
 {
 	texture->c_rgb[0] = -1;
 	texture->c_rgb[1] = -1;
@@ -107,5 +107,49 @@ int	check_rgb(char *str_c, char *str_f, t_texture *texture)
 		return (1);
 	if (check_int255(texture))
 		return (1);
+	return (0);
+} */
+
+int	get_color(int r, int g, int b, t_info *info)
+{
+	int	color;
+
+	color = 65536 * r + 256 * g + b;
+	if (r < 0 || r > 255)
+		display_error("wrong number for rgb color", EXIT_FAILURE, info);
+	if (g < 0 || g > 255)
+		display_error("wrong number for rgb color", EXIT_FAILURE, info);
+	if (b < 0 || b > 255)
+		display_error("wrong number for rgb color", EXIT_FAILURE, info);
+	return (color);
+}
+
+int	parse_color(t_info *info, char *line, int ret)
+{
+	int	r;
+	int	g;
+	int	b;
+	int	i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (!ft_isdigit(line[i]) && line[i] != ',')
+			return (1);
+	}
+	i = 0;
+	r = ft_atoi(line);
+	while (ft_isdigit(line[i]))
+		i++;
+	line += i + 1;
+	g = ft_atoi(line);
+	while (ft_isdigit(line[i]))
+		i++;
+	line += i + 1;
+	b = ft_atoi(line);
+	if (ret)
+		info->env.color_ceil = get_color(r, g, b, info);
+	else
+		info->env.color_floor = get_color(r, g, b, info);
 	return (0);
 }

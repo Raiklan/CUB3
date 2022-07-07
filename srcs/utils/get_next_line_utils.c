@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 10:12:58 by ajordan-          #+#    #+#             */
-/*   Updated: 2022/05/24 19:32:19 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/07 16:46:02 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strrjoin(char *left_str, char *buff)
 	}
 	if (!left_str || !buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlenn(left_str) + ft_strlenn(buff)) + 1));
+	str = malloc(sizeof(char) *((ft_strlenn(left_str) + ft_strlenn(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;

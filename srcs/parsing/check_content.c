@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/07/06 19:30:01 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/07 19:49:33 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,13 @@ t_info	*init_info(void)
 		return (NULL);
 	info->env.pos_dir = 0;
 	ft_bzero(&info->env, sizeof(info->env));
-	if (check_malloc(&info->texture, sizeof(t_texture)))
-		return (NULL);
-	ft_bzero(info->texture, sizeof(t_texture));
-	info->texture->celling = NULL;
-	info->texture->ea_path = NULL;
-	info->texture->floor = NULL;
+	info->env.wall_ea.path = NULL;
+	info->env.wall_no.path = NULL;
+	info->env.wall_so.path = NULL;
+	info->env.wall_we.path = NULL;
+	info->env.celling = NULL;
+	info->env.floor = NULL;
 	info->map = NULL;
-	info->texture->no_path = NULL;
-	info->texture->so_path = NULL;
-	info->texture->we_path = NULL;
-	info->str = NULL;
 	return (info);
 }
 
@@ -123,9 +119,8 @@ void	*check_content(t_info *info)
 		return (free_info(info));
 	}
 	parse_map(info->map, info);
-	init_rgb(info->texture);
-	if (check_rgb(info->texture->floor, info->texture->celling, info->texture))
-		display_error("Rgb is not the right format", 1, info);
+	if (parse_color(info, info->env.celling, 1) || parse_color(info, info->env.floor, 0))
+		display_error("Bad rgb config", 1, info);
 	free_info(info);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:26:38 by saich             #+#    #+#             */
-/*   Updated: 2022/06/15 17:40:21 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/07 17:03:50 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ int	print_error(char *str)
 	write(2, "Error\n", 6);
 	write(2, str, ft_strlen(str));
 	return (1);
+}
+
+void	cub3d(t_info *info)
+{
+	info->mlx.mlx_ptr = mlx_init();
+	//get_all_texture(info);
+	info->mlx.img_ptr = mlx_new_image(info->mlx.mlx_ptr, info->resolution.x,
+			info->resolution.y);
+	info->mlx.img_addr = (unsigned int *)mlx_get_data_addr(info->mlx.img_ptr,
+			&(info->mlx.bpp), &(info->mlx.size_line), &(info->mlx.endian));
+	info->mlx.win_ptr = mlx_new_window(info->mlx.mlx_ptr, info->resolution.x,
+			info->resolution.y, "CUB3D");
+	//mlx_loop_hook(info->mlx.mlx_ptr, raycasting, info);
+	mlx_loop(info->mlx.mlx_ptr);
 }
 
 int	check_cub_ext(char **av)
@@ -87,7 +101,7 @@ int	get_info(char **av, t_info	*info)
 int	main(int ac, char **av)
 {
 	t_info	*info;
-	
+
 	info = init_info();
 	if (!info || !info->lst)
 		return (EXIT_FAILURE);
@@ -105,5 +119,6 @@ configuration of the map !\n");
 		return (EXIT_FAILURE);
 	if (!check_content(info))
 		return (EXIT_FAILURE);
+	cub3d(info);
 	return (0);
 }
