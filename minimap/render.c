@@ -104,13 +104,14 @@ void	draw_player(t_info *info, t_img *tmp)
 		}
 
 
-		if (side == 1 && rangle >= (5 * PI) / 4 && rangle <= (7 * PI) / 4)
+		if (side == 1 && rangle >= PI && (rangle <= PI * 2 || rangle <= 0))
 			printf("N\n");
-		else if (side == 1 && rangle >= PI / 4 && rangle <= (3 * PI) / 4)
+		else if (side == 1 && rangle >= 0 && rangle <= PI)
 			printf("S\n");
-		else if (side == 0 && rangle >= PI / 2 && rangle <= (3 * PI) / 2)
+		
+		if (side == 0 && rangle >= PI / 2 && rangle <= (3 * PI) / 2)
 			printf("W\n");
-		else
+		else if (side == 0)
 			printf("E\n");
 
 		rays++;
