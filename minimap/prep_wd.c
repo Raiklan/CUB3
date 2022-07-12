@@ -54,7 +54,7 @@ char	**main_2(int argc, char **argv, t_info *info)
 	line = prep_line(fd, get_next_line(fd), NULL, NULL);
 	if (line == NULL)
 		return (NULL);
-	info->tile_size = 30;
+	info->tile_size = 20;
 	info->wd_width = 1000;
 	info->wd_height = 800;
 	info->img.img_ptr = NULL;

@@ -1,7 +1,7 @@
 
 #include "fdf.h"
 
-/*int	key_release(int key_sym, t_info *info)
+int	key_release(int key_sym, t_info *info)
 {
 	if (key_sym == XK_Escape)
 	{
@@ -86,16 +86,16 @@ int	key_press(int key_sym, t_info *info)
 		info->player.angle -= 0.1;
 		if (info->player.angle < 0)
 			info->player.angle += 2 * PI;
-		info->player.dirx = cos(info->player.angle) * 5;
-		info->player.diry = sin(info->player.angle) * 5;
+		info->player.dirx = cos(info->player.angle) * 2;//change the num to change movespeed (pixel)
+		info->player.diry = sin(info->player.angle) * 2;
 	}
 	else if (key_sym == 0xff53)//right
 	{
 		info->player.angle += 0.1;
 		if (info->player.angle > 2 * PI) 
 			info->player.angle -= 2 * PI;
-		info->player.dirx = cos(info->player.angle) * 5;
-		info->player.diry = sin(info->player.angle) * 5;
+		info->player.dirx = cos(info->player.angle) * 2;
+		info->player.diry = sin(info->player.angle) * 2;
 	}
 	up_down(info, key_sym);
 	left_right(info, key_sym);
@@ -123,13 +123,13 @@ int	key_press(int key_sym, t_info *info)
 	write(1, "--------------------------------------------------------------------------------\n", 81);
 	write(1, "\n", 1);
 	return (0);
-}*/
+}
 
 
 
 
 
-int	key_release(int key_sym, t_info *info)
+/*int	key_release(int key_sym, t_info *info)
 {
 	if (key_sym == XK_Escape)
 	{
@@ -251,7 +251,7 @@ int	key_press(int key_sym, t_info *info)
 	write(1, "--------------------------------------------------------------------------------\n", 81);
 	write(1, "\n", 1);
 	return (0);
-}
+}*/
 
 int	handle_no_event(void)
 {

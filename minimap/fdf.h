@@ -66,6 +66,8 @@ typedef struct	s_player
 	float dirx;
 	float diry;
 	float angle;
+	double planex;
+	double planey;
 }				t_player;
 
 typedef struct s_info
