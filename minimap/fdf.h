@@ -74,13 +74,9 @@ typedef struct s_info
 {
 	void	*id;
 	void	*wd_ptr;
-	int		z;
 	int		wd_height;
 	int		wd_width;
-	int		longest_line;
-	int		col;
 	int		tile_size;
-	int		i;
 	int		color;
 	t_img	img;
 	t_player player;

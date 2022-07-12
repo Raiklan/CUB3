@@ -135,7 +135,7 @@ void	draw_fps(t_info *info, t_img *tmp)
 
 
 		if(side == 0)
-			perpWallDist = (le_restex - next_full_x) / 2;
+			perpWallDist = (le_restex - next_full_x) / 2;//can change the ratio (/ x) if tile_size is changed
 		else
 			perpWallDist = (le_restey - next_full_y) / 2;
 
