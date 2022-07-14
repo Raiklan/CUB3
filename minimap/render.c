@@ -132,12 +132,14 @@ void	draw_fps(t_info *info, t_img *tmp)
 		if (side == 0)
 			info->color /= 2;
 
-
-
 		if(side == 0)
 			perpWallDist = (le_restex - next_full_x) / 2;//can change the ratio (/ x) if tile_size is changed
 		else
 			perpWallDist = (le_restey - next_full_y) / 2;
+		if (perpWallDist <= 0)
+			perpWallDist = 0.1;
+		else
+			perpWallDist = perpWallDist * cos(rangle - info->player.angle);
 
 		int lineHeight = (int)(info->wd_height / perpWallDist);
 		//calculate lowest and highest pixel to fill in current stripe
@@ -264,7 +266,7 @@ void	draw_player_rays(t_info *info, t_img *tmp)
 		}
 
 
-		if (side == 1 && rangle >= PI && (rangle <= PI * 2 || rangle <= 0))
+		/*if (side == 1 && rangle >= PI && (rangle <= PI * 2 || rangle <= 0))
 			printf("N\n");
 		else if (side == 1 && rangle >= 0 && rangle <= PI)
 			printf("S\n");
@@ -272,7 +274,7 @@ void	draw_player_rays(t_info *info, t_img *tmp)
 		if (side == 0 && rangle >= PI / 2 && rangle <= (3 * PI) / 2)
 			printf("W\n");
 		else if (side == 0)
-			printf("E\n");
+			printf("E\n");*/
 
 		if (side == 0)
 			info->color /= 2;

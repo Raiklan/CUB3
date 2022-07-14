@@ -201,8 +201,8 @@ void	left_right(t_info *info, int key_sym)
 
 int	key_press(int key_sym, t_info *info)
 {
-	printf("dirx = %f, diry = %f\n", info->player.dirx ,info->player.diry);
-	printf("x = %f, y = %f\n", info->player.x / info->tile_size ,info->player.y / info->tile_size);
+	//printf("dirx = %f, diry = %f\n", info->player.dirx ,info->player.diry);
+	//printf("x = %f, y = %f\n", info->player.x / info->tile_size ,info->player.y / info->tile_size);
 
 	if (key_sym == XK_Escape)
 	{
@@ -230,7 +230,7 @@ int	key_press(int key_sym, t_info *info)
 	if (key_sym == 0x7a || key_sym == 0x73 || key_sym == 0x71 || key_sym == 0x64 || key_sym == 0xff51 || key_sym == 0xff53)//can comment this line for norm, not a big deal
 		render(info);
 	
-	printf("after dirx = %f, after diry = %f\n\n", info->player.dirx ,info->player.diry);
+	/*printf("after dirx = %f, after diry = %f\n\n", info->player.dirx ,info->player.diry);
 	int x;
 	int y =0;
 	while (info->line[y])
@@ -249,7 +249,7 @@ int	key_press(int key_sym, t_info *info)
 	}
 	write(1, "\n", 1);
 	write(1, "--------------------------------------------------------------------------------\n", 81);
-	write(1, "\n", 1);
+	write(1, "\n", 1);*/
 	return (0);
 }
 
