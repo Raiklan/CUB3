@@ -58,6 +58,8 @@ char	**main_2(int argc, char **argv, t_info *info)
 	info->wd_width = 1000;
 	info->wd_height = 800;
 	info->img.img_ptr = NULL;
+	info->floor = 0x2f4f4f;
+	info->ceiling = 0x778899;
 	i = 0;
 	while (line[i])
 	{

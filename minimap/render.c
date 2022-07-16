@@ -12,6 +12,27 @@
 
 #include "fdf.h"
 
+void	draw_floor_ceiling(t_info *info, t_img *tmp)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	info->color = info->ceiling;
+	while (j < info->wd_height)
+	{
+		i = 0;
+		while (i < info->wd_width)
+		{
+			img_pix_put(info, tmp, i, j);
+			i++;
+		}
+		j++;
+		if (j == info->wd_height / 2)
+			info->color = info->floor;
+	}
+}
+
 void	draw_fps(t_info *info, t_img *tmp)
 {
 	int rayx;
@@ -27,14 +48,9 @@ void	draw_fps(t_info *info, t_img *tmp)
 	int stepy;
 	bool wall_hit;
 	bool side;
-	int x = 8;
+	int x = 0;
 	int test;
 
-	//double cameraX = 2 * info->player.x / (double)(info->wd_width) - 1; //x-coordinate in camera space
-	// double planex;// = 0;
-	// double planey;// = 0.6;//number of rays(degrees)?// need to perpendicular to player dir
-	// info->player.planex = 0;
-	// info->player.planey = 0.6;
 
 	t_coor	coor;
 
@@ -58,12 +74,8 @@ void	draw_fps(t_info *info, t_img *tmp)
 		rayx = info->player.x;
 		rayy = info->player.y;
 
-		// info->player.planex = (rayx - sin(rangle) * 5) + (rayy + cos(rangle) * 5);
-		// info->player.planey = (rayx + sin(rangle) * 5) + (rayy - cos(rangle) * 5);
-
-
-		ray_dirx = cos(rangle) * 5;// + info->player.planex * cameraX;//add camera/plane??
-		ray_diry = sin(rangle) * 5;// + info->player.planey * cameraX;
+		ray_dirx = cos(rangle) * 5;
+		ray_diry = sin(rangle) * 5;
 		wall_hit = 0;
 
 
@@ -176,15 +188,10 @@ void	draw_player_rays(t_info *info, t_img *tmp)
 	double next_full_y;
 	double le_restex;
 	double le_restey;
-	//double perpWallDist;
 	int stepx;
 	int stepy;
 	bool wall_hit;
 	bool side;
-
-	//double cameraX = 2 * info->player.x / double(info->wd_width) - 1; //x-coordinate in camera space
-	// double planex// = 0;
-	// double planey// = 0.6;//number of rays(degrees)?// need to perpendicular to player dir
 
 	t_coor	coor;
 
@@ -207,10 +214,8 @@ void	draw_player_rays(t_info *info, t_img *tmp)
 		rayx = info->player.x;
 		rayy = info->player.y;
 
-		//info->player.planex =;
-		//info->player.planey =;
-		ray_dirx = cos(rangle) * 5 ;//+ info->player.planex * cameraX;//add camera/plane??
-		ray_diry = sin(rangle) * 5;// + info->player.planey * cameraX;
+		ray_dirx = cos(rangle) * 5 ;
+		ray_diry = sin(rangle) * 5;
 		wall_hit = 0;
 
 
@@ -360,17 +365,23 @@ int    render(t_info *info)
         return (destroyer(info, info->line));
     tmp.addr = mlx_get_data_addr(tmp.img_ptr, &tmp.bpp, &tmp.line_len, &tmp.endian);
     info->color = 0x0;
-    clear_background(info, &tmp);
+	//clear_background(info, &tmp);
 
+    draw_floor_ceiling(info, &tmp);
+    draw_fps(info, &tmp);
     draw_minimap(info, &tmp, 0, 0);
     draw_player_rays(info, &tmp);
+    //info->texture = mlx_xpm_file_to_image(info->id, "./backroom_wallpaper.xpm", &info->texture_width, &info->texture_height);
+    //printf("texture_height = %d | texture_width = %d\n", info->texture_height, info->texture_width);
+    //if (info->texture == NULL)
+    //	exit(-1);
 
-    draw_fps(info, &tmp);
     if (info->img.img_ptr != NULL)
     {
         mlx_destroy_image(info->id, info->img.img_ptr);
         info->img.img_ptr = NULL;
     }
+    //info->img.img_ptr = info->texture;
     info->img.img_ptr = tmp.img_ptr;
     mlx_put_image_to_window(info->id, info->wd_ptr, info->img.img_ptr, 0, 0);
     return (0);

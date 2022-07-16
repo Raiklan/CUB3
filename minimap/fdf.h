@@ -81,6 +81,11 @@ typedef struct s_info
 	t_img	img;
 	t_player player;
 	char **line;
+	int floor;
+	int ceiling;
+	void *texture;
+	int texture_height;
+	int texture_width;
 }				t_info;
 
 int		ft_wordcount(char const *str, char c);
