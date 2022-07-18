@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:52 by saich             #+#    #+#             */
-/*   Updated: 2022/07/07 19:51:17 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/18 19:42:37 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int	parse_color(t_info *info, char *line, int ret)
 	while (line[++i])
 	{
 		if (!ft_isdigit(line[i]) && line[i] != ',')
+			return (1);
+		if (line[i] == ',' && line[i + 1] && line[i + 1] == ',')
 			return (1);
 	}
 	i = 0;

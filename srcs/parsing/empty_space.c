@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 22:48:24 by saich             #+#    #+#             */
-/*   Updated: 2022/06/20 19:26:28 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/18 20:14:42 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	suppress_emptyl(t_list **lst)
 		free(cur);
 	}
 	tmp = *lst;
-	while (tmp)
+	while (tmp && !is_map(tmp->content))
 	{
 		cur = tmp->next;
 		while (cur && empty_space_line(cur))

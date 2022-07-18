@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/07 19:50:52 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/18 19:39:28 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	parse_map(char **map, t_info *info);
 //error.c
 void	handle_error(int ret, t_info *info);
 void	*display_error(char *msg, int code, t_info *info);
+int		check_island(char **map);
 
 //check_rgb.c
 int		check_rgb(char *str_c, char *str_f, t_texture *text);
