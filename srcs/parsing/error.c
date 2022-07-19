@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:53:16 by saich             #+#    #+#             */
-/*   Updated: 2022/07/18 19:51:08 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/19 16:33:58 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,30 @@ int	check_island(char **map)
 		j++;
 	}
 	return (0);
+}
+
+static void	mlx_clear(t_info *info)
+{
+	if (info->env.wall_ea.tex_ptr)
+		mlx_destroy_image(info->mlx.mlx_ptr, info->env.wall_ea.tex_ptr);
+	if (info->env.wall_no.tex_ptr)
+		mlx_destroy_image(info->mlx.mlx_ptr, info->env.wall_no.tex_ptr);
+	if (info->env.wall_so.tex_ptr)
+		mlx_destroy_image(info->mlx.mlx_ptr, info->env.wall_so.tex_ptr);
+	if (info->env.wall_we.tex_ptr)
+		mlx_destroy_image(info->mlx.mlx_ptr, info->env.wall_we.tex_ptr);
+	if (info->mlx.mlx_window)
+	{
+		mlx_clear_window(info->mlx.mlx_ptr, info->mlx.mlx_window);
+		mlx_destroy_window(info->mlx.mlx_ptr, info->mlx.mlx_window);
+	}
+	if (info->mlx.img_ptr)
+		mlx_destroy_image(info->mlx.mlx_ptr, info->mlx.img_ptr);
+}
+
+int	exit_window(t_info *info, char *msg)
+{
+	mlx_clear(info);
+	display_error(msg, EXIT_SUCCESS, info);
+	return (1);
 }
