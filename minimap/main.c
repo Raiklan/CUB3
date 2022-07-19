@@ -73,6 +73,16 @@ int	main(int argc, char **argv)
 			"fdf" );
 	if (info.wd_ptr == NULL)
 		return (-1);
+
+
+	info.texture.tex_ptr = mlx_xpm_file_to_image(info.id, "./backroom_wallpaper.xpm", &info.texture.texture_width, &info.texture.texture_height);
+	if (info.texture.tex_ptr == NULL)
+    	exit(-1);
+	info.texture.addr = mlx_get_data_addr(info.texture.tex_ptr, &info.texture.bpp, &info.texture.line_len, &info.texture.endian);
+   	info.texture.x = 0;
+   	info.texture.y = 0;
+	
+
 	if (render(&info) == -1)
 		return (destroyer(&info, line));
 	mlx_loop_hook(info.id, &handle_no_event, &info);

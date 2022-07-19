@@ -1,4 +1,4 @@
-SRCS = main.c keypress.c bresenham.c prep_wd.c render.c utils.c get_next_line.c libft.c ft_split.c
+SRCS = main.c keypress.c bresenham.c prep_wd.c render.c minimap.c fps.c utils.c get_next_line.c libft.c ft_split.c
 C.O = ${SRCS:.c=.o}
 H = fdf.h
 NAME = fdf

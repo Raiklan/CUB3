@@ -70,6 +70,51 @@ typedef struct	s_player
 	double planey;
 }				t_player;
 
+typedef struct	s_minimap
+{
+	int	i;
+	int	j;
+	int	pixel_count;
+	int	col_count;
+	int	x;
+	int	y;
+}				t_minimap;
+
+typedef struct s_texture
+{
+	void	*tex_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int texture_height;
+	int texture_width;
+	int x;
+	int y;
+}				t_texture;
+
+typedef struct	s_raycast
+{
+	int rayx;
+	int rayy;
+	double ray_dirx;
+	double ray_diry;
+	double next_full_x;
+	double next_full_y;
+	double le_restex;
+	double le_restey;
+	double perpWallDist;
+	int stepx;
+	int stepy;
+	bool wall_hit;
+	bool side;
+	int rays;
+	float rangle;
+	int	lineHeight;
+	int	drawStart;
+	int	drawEnd;
+}				t_raycast;
+
 typedef struct s_info
 {
 	void	*id;
@@ -77,15 +122,13 @@ typedef struct s_info
 	int		wd_height;
 	int		wd_width;
 	int		tile_size;
-	int		color;
+	unsigned int		color;
 	t_img	img;
 	t_player player;
 	char **line;
 	int floor;
 	int ceiling;
-	void *texture;
-	int texture_height;
-	int texture_width;
+	t_texture texture;
 }				t_info;
 
 int		ft_wordcount(char const *str, char c);
@@ -101,16 +144,29 @@ char	*ft_strjoin(char const *s1, char const *s2, int i);
 //bresenham
 void	prep_axe(t_coor *coor, t_bre *bre);
 void	correct_axe(t_bre *bre);
-void	bresenham_new(t_info *info, t_img *tmp, t_coor *coor);
+void	bresenham_new(t_info *info, t_img *tmp, t_coor *coor, int side);
 
 //utils
 void	clear_background(t_info *info, t_img *tmp);
 void	set_coor(t_info *info, t_coor *coor);
 
 //render
-void	draw_player(t_info *info, t_img *tmp);
-void	draw_minimap(t_info *info, t_img *tmp, int x, int y);
+void	init_rays_stuff(t_info *info, t_raycast *raycast);
+void	get_rays_step_dir(t_info *info, t_raycast *raycast);
+void	get_wall_contact(t_info *info, t_raycast *raycast);
+void	get_wall_heigth(t_info *info, t_raycast *raycast);
 int		render(t_info *info);
+
+//minimap
+void	draw_player_rays(t_info *info, t_img *tmp);
+void	draw_player(t_info *info, t_img *tmp);
+t_minimap	minimap_init();
+void	chose_minimap_color(t_info *info, t_minimap *minimap);
+void	draw_minimap(t_info *info, t_img *tmp, t_minimap minimap);
+
+//fps
+void	draw_floor_ceiling(t_info *info, t_img *tmp);
+void	draw_fps(t_info *info, t_img *tmp);
 
 //prep_wd
 char	**prep_line(int fd, char *buf, char *line, char *tmp);
