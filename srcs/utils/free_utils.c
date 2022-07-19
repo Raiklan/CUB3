@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:28:43 by saich             #+#    #+#             */
-/*   Updated: 2022/07/07 19:49:40 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/19 16:35:47 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,20 @@ void	*free_info(t_info *info)
 	free(info->lst);
 	free(info);
 	return (NULL);
+}
+
+int	leave_prog(void *info)
+{
+	exit_window((t_info *)info, "Leaving program");
+	return (1);
+}
+
+int	size_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i] != 0)
+		i++;
+	return (i - 1);
 }

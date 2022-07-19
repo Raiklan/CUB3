@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/07/18 19:52:50 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/19 16:37:50 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_info	*init_info(void)
 	info->env.celling = NULL;
 	info->env.floor = NULL;
 	info->map = NULL;
+	info->resolution.y = 600;
+	info->resolution.x = 800;
 	return (info);
 }
 
@@ -119,11 +121,8 @@ void	*check_content(t_info *info)
 		return (free_info(info));
 	}
 	parse_map(info->map, info);
-	for (int i = 0; info->map[i]; i++)
-		printf("%s\n", info->map[i]);
 	if (parse_color(info, info->env.celling, 1) || parse_color(info, info->env.floor, 0))
 		display_error("Bad rgb config", 1, info);
-	free_info(info);
 	return (NULL);
 }
 

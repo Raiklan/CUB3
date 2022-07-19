@@ -14,7 +14,13 @@ SRCS =	srcs/main.c	\
 		srcs/parsing/check_space.c \
 		srcs/parsing/check_limit.c \
 		srcs/parsing/error.c \
-		srcs/parsing/check_rgb.c
+		srcs/parsing/check_rgb.c \
+		srcs/texture.c \
+		srcs/raycasting/raycasting.c \
+		srcs/raycasting/draw.c \
+		srcs/raycasting/rotate.c \
+		srcs/raycasting/movement.c \
+		srcs/raycasting/key.c 
 
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/18 19:39:28 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/19 16:36:03 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,43 @@
 # include <math.h>
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
+
+# define ROTATESPEED 0.01
+# define MOVESPEED 0.01
+
+typedef struct s_cast
+{
+	float		posx;
+	float		posy;
+	float		dirx;
+	float		diry;
+	float		planx;
+	float		plany;
+	float		camerax;
+	float		ray_dirx;
+	float		ray_diry;
+	float		wall_hit;
+	float		side_distx;
+	float		side_disty;
+	float		delta_distx;
+	float		delta_disty;
+	float		perpwalldist;
+	int			**buffer;
+	int			screenh;
+	int			screenw;
+	int			mapx;
+	int			mapy;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			x_event;
+	int			x_mask;
+	int			color;
+}	t_cast;
 
 typedef struct s_resolution
 {
@@ -56,6 +93,16 @@ typedef struct s_env
 	int			color_floor;
 }				t_env;
 
+typedef struct s_key
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}				t_key;
+
 typedef struct s_mlx
 {
 	void			*mlx_window;
@@ -74,6 +121,8 @@ typedef struct s_info
 	t_env			env;
 	t_mlx			mlx;
 	t_resolution	resolution;
+	t_cast			cast;
+	t_key			key;
 	char			**map;
 }					t_info;
 
@@ -94,6 +143,8 @@ t_info	*init_info(void);
 //free_utils.c
 void	*free_info(t_info *info);
 int		count_lst(t_list *lst);
+int		leave_prog(void *info);
+
 
 //check_spaces.c
 int		check_space(char **map, int i, int j);
@@ -108,11 +159,45 @@ void	parse_map(char **map, t_info *info);
 void	handle_error(int ret, t_info *info);
 void	*display_error(char *msg, int code, t_info *info);
 int		check_island(char **map);
+int		exit_window(t_info *info, char *msg);
+int		size_map(char **map);
 
 //check_rgb.c
 int		check_rgb(char *str_c, char *str_f, t_texture *text);
 void	init_rgb(t_texture *texture);
 int		parse_color(t_info *info, char *line, int ret);
 int		get_color(int r, int g, int b, t_info *info);
+
+//texture.c
+void	get_all_texture(t_info	*info);
+void	get_texture(t_texture *tex, t_info *info);
+
+//raycasting.c
+int		raycasting(t_info *info);
+void	find_wall(t_info	*info);
+void	build_wall(t_info *info);
+void	build_ray(t_info *info);
+void	init_raycast(t_info *info, int x);
+
+//rotate.c
+void	rotate_left(t_info *info);
+void	rotate_right(t_info *info);
+
+//key.c
+int	get_number(int key, t_info *info);
+int	push_nbr(int key, t_info *info);
+
+//movement.c
+void	ft_move(t_info *info);
+void	move_back(float dirx, float diry, t_info *info);
+void	move_front(float dirx, float diry, t_info *info);
+void	move_left(float dirx, float diry, t_info *info);
+void	move_right(float dirx, float diry, t_info *info);
+
+//draw.c
+void	set_wall_hit(t_info *info);
+void	build_t(t_info *info, t_texture *tex, int i);
+void	draw_wall(t_info *info, int x);
+void	draw_background(t_info *info, int i);
 
 #endif

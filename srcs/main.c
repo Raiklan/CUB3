@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:26:38 by saich             #+#    #+#             */
-/*   Updated: 2022/07/07 17:03:50 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/19 16:37:22 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ int	print_error(char *str)
 void	cub3d(t_info *info)
 {
 	info->mlx.mlx_ptr = mlx_init();
-	//get_all_texture(info);
+	get_all_texture(info);
 	info->mlx.img_ptr = mlx_new_image(info->mlx.mlx_ptr, info->resolution.x,
 			info->resolution.y);
 	info->mlx.img_addr = (unsigned int *)mlx_get_data_addr(info->mlx.img_ptr,
 			&(info->mlx.bpp), &(info->mlx.size_line), &(info->mlx.endian));
 	info->mlx.win_ptr = mlx_new_window(info->mlx.mlx_ptr, info->resolution.x,
 			info->resolution.y, "CUB3D");
-	//mlx_loop_hook(info->mlx.mlx_ptr, raycasting, info);
+	mlx_hook(info->mlx.win_ptr, 17, 0L, leave_prog, info);
+	mlx_hook(info->mlx.win_ptr, 3, (1L << 1), push_nbr, info);
+	mlx_hook(info->mlx.win_ptr, 2, (1L << 0), get_number, info);
+	mlx_loop_hook(info->mlx.mlx_ptr, raycasting, info);
 	mlx_loop(info->mlx.mlx_ptr);
 }
 
@@ -117,8 +120,7 @@ configuration of the map !\n");
 		return (EXIT_FAILURE);
 	if (get_info(av, info))
 		return (EXIT_FAILURE);
-	if (!check_content(info))
-		return (EXIT_FAILURE);
+	check_content(info);
 	cub3d(info);
 	return (0);
 }
