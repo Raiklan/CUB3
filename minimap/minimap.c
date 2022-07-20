@@ -8,9 +8,9 @@ void	draw_player_rays(t_info *info, t_img *tmp)
 	t_coor		coor;
 
 	coor.tile_size = info->tile_size;
-	raycast.rangle = info->player.angle - (DEGREE * 30);
+	raycast.rangle = info->player.angle - (DEGREE * info->fov / 2);
 	raycast.rays = 0;
-	while (raycast.rays < 60)
+	while (raycast.rays < info->fov)
 	{
 		info->color = 0x0000ff;
 		init_rays_stuff(info, &raycast);

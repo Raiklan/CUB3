@@ -31,10 +31,10 @@ void	draw_fps(t_info *info, t_img *tmp)
 	t_coor	coor;
 
 	coor.tile_size = info->tile_size;
-	raycast.rangle = info->player.angle - (DEGREE * 30);
+	raycast.rangle = info->player.angle - (DEGREE * info->fov / 2);
 	raycast.rays = 0;
 	x = 0;
-	while (raycast.rays < 60)
+	while (raycast.rays < info->fov)
 	{
 		test = 0;
 		info->color = 0x0000ff;

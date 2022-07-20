@@ -60,6 +60,7 @@ char	**main_2(int argc, char **argv, t_info *info)
 	info->img.img_ptr = NULL;
 	info->floor = 0x2f4f4f;
 	info->ceiling = 0x778899;
+	info->fov = 60;
 	i = 0;
 	while (line[i])
 	{

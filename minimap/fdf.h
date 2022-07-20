@@ -123,6 +123,7 @@ typedef struct s_info
 	int		wd_width;
 	int		tile_size;
 	unsigned int		color;
+	int		fov;
 	t_img	img;
 	t_player player;
 	char **line;
