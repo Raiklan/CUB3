@@ -20,7 +20,9 @@ SRCS =	srcs/main.c	\
 		srcs/raycasting/draw.c \
 		srcs/raycasting/rotate.c \
 		srcs/raycasting/movement.c \
-		srcs/raycasting/key.c 
+		srcs/raycasting/key.c \
+		srcs/bresenham.c \
+		srcs/minimap.c
 
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o
