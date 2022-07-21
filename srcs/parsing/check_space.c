@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:19:30 by saich             #+#    #+#             */
-/*   Updated: 2022/06/20 19:31:55 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 18:54:16 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,6 @@ int	check_space(char **map, int i, int j)
 	{
 		if (i == 1 && !check_space_first(map))
 			return (0);
-		if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'N' && \
-map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != 'E' && map[i][j] != ' ')
-			return (print_error("Character of the map \
-can only be : 1, 0, N, E, S, W or spaces\n"));
 		if (map[i][j] == ' ')
 		{
 			if (check_space_closed(map, i, j, map_length(map)) == 0)

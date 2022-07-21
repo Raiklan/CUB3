@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:14:32 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:52:37 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 18:56:02 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,26 @@ int	print_error(char *str)
 	write(2, "Error\n", 6);
 	write(2, str, ft_strlen(str));
 	return (1);
+}
+
+int	check_char(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'N' && \
+map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != 'E' && map[i][j] != ' ')
+				return (print_error("Character of the map \
+can only be : 1, 0, N, E, S, W or spaces\n"));
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }

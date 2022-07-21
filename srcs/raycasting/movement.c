@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:22:57 by saich             #+#    #+#             */
-/*   Updated: 2022/07/19 16:25:27 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 18:51:40 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ void	move_right(float dirx, float diry, t_info *info)
 
 	tempy = info->cast.posy - (MOVESPEED * dirx);
 	tempx = info->cast.posx + (MOVESPEED * diry);
-	if ((int)tempy <= 0 || (int)tempy + 1
-		>= (int)ft_strlen(info->map[info->cast.mapx]) || (int)tempx <= 0
-		|| (int)tempx >= size_map(info->map))
-		exit_window(info, "You left the map");
-	info->cast.posy = tempy;
-	info->cast.posx = tempx;
+	if (info->map[(int)info->cast.posx][(int)tempy] != '1')
+		info->cast.posy = tempy;
+	if (info->map[(int)tempx][(int)info->cast.posy] != '1')
+		info->cast.posx = tempx;
 }
 
 void	move_left(float dirx, float diry, t_info *info)
@@ -34,12 +32,10 @@ void	move_left(float dirx, float diry, t_info *info)
 
 	tempy = info->cast.posy + (MOVESPEED * dirx);
 	tempx = info->cast.posx - (MOVESPEED * diry);
-	if ((int)tempy <= 0 || (int)tempy + 1
-		>= (int)ft_strlen(info->map[info->cast.mapx]) || (int)tempx <= 0
-		|| (int)tempx >= size_map(info->map))
-		exit_window(info, "You left the map");
-	info->cast.posy = tempy;
-	info->cast.posx = tempx;
+	if (info->map[(int)info->cast.posx][(int)tempy] != '1')
+		info->cast.posy = tempy;
+	if (info->map[(int)tempx][(int)info->cast.posy] != '1')
+		info->cast.posx = tempx;
 }
 
 void	move_front(float dirx, float diry, t_info *info)
@@ -49,12 +45,10 @@ void	move_front(float dirx, float diry, t_info *info)
 
 	tempy = info->cast.posy + (MOVESPEED * diry);
 	tempx = info->cast.posx + (MOVESPEED * dirx);
-	if ((int)tempy <= 0 || (int)tempy + 1
-		>= (int)ft_strlen(info->map[info->cast.mapx]) || (int)tempx <= 0
-		|| (int)tempx >= size_map(info->map))
-		exit_window(info, "You left the map");
-	info->cast.posy = tempy;
-	info->cast.posx = tempx;
+	if (info->map[(int)info->cast.posx][(int)tempy] != '1')
+		info->cast.posy = tempy;
+	if (info->map[(int)tempx][(int)info->cast.posy] != '1')
+		info->cast.posx = tempx;
 }
 
 void	move_back(float dirx, float diry, t_info *info)
@@ -64,12 +58,10 @@ void	move_back(float dirx, float diry, t_info *info)
 
 	tempy = info->cast.posy - (MOVESPEED * diry);
 	tempx = info->cast.posx - (MOVESPEED * dirx);
-	if ((int)tempy <= 0 || (int)tempy + 1
-		>= (int)ft_strlen(info->map[info->cast.mapx]) || (int)tempx <= 0
-		|| (int)tempx >= size_map(info->map))
-		exit_window(info, "You left the map");
-	info->cast.posy = tempy;
-	info->cast.posx = tempx;
+	if (info->map[(int)info->cast.posx][(int)tempy] != '1')
+		info->cast.posy = tempy;
+	if (info->map[(int)tempx][(int)info->cast.posy] != '1')
+		info->cast.posx = tempx;
 }
 
 void	ft_move(t_info *info)

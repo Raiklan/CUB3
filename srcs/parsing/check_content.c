@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:12:01 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 19:01:08 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	*check_content(t_info *info)
 		return (free_info(info));
 	}
 	parse_map(info->map, info);
+	if (check_char(info->map))
+		display_error("", 0, info);
 	if (parse_color(info, info->env.celling, 1)
 		|| parse_color(info, info->env.floor, 0))
 		display_error("Bad rgb config", 1, info);

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:21:29 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 18:57:30 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int		check_border_horiz(char *line);
 int		check_first_wall(char *line);
 int		check_last_wall(char *line, int i);
 t_info	*init_info(void);
+int		check_char(char **map);
 
 //free_utils.c
 void	*free_info(t_info *info);
