@@ -21,9 +21,29 @@ SRCS =	srcs/main.c	\
 		srcs/raycasting/rotate.c \
 		srcs/raycasting/movement.c \
 		srcs/raycasting/key.c \
-		srcs/bresenham.c \
-		srcs/minimap.c
 
+SRCS_BONUS =	srcs/main.c	\
+				srcs/utils/get_next_line.c \
+				srcs/utils/get_next_line_utils.c \
+				srcs/parsing/check_content.c \
+				srcs/parsing/empty_space.c \
+				srcs/parsing/check_map.c \
+				srcs/parsing/check_border.c \
+				srcs/utils/free_utils.c \
+				srcs/parsing/check_space.c \
+				srcs/parsing/check_limit.c \
+				srcs/parsing/error.c \
+				srcs/parsing/check_rgb.c \
+				srcs/texture.c \
+				srcs/raycasting/draw.c \
+				srcs/raycasting/rotate.c \
+				srcs/raycasting/key.c \
+				bonus/raycasting_bonus.c \
+				bonus/movement_bonus.c \
+				bonus/bresenham_bonus.c \
+				bonus/minimap_bonus.c
+
+OBJ_BONUS		= ${SRCS_BONUS:.c=.o}
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o
 CC		= gcc
@@ -38,6 +58,10 @@ all :
 
 $(NAME)	: $(OBJ)
 	$(CC) $(CFLAGS) -I libft/ -I include/ -I mlx_linux/ $(OBJ) libft/libft.a -o $(NAME) $(LIB)
+
+bonus : $(OBJ_BONUS)
+	@make bonus -C $(LIBFT)
+	$(CC) $(CFLAGS) -I libft/ -I include/ -I mlx_linux/ $(OBJ_BONUS) libft/libft.a -o $(NAME) $(LIB)
 
 key :#a retirer
 	cd ./mlx_linux && make && cd ..

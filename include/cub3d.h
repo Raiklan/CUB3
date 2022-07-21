@@ -115,39 +115,6 @@ typedef struct s_mlx
 	int				endian;
 }	t_mlx;
 
-typedef struct s_minimap
-{
-	int	i;
-	int	j;
-	int	pixel_count;
-	int	col_count;
-	int	x;
-	int	y;
-	int	tile_size;
-}				t_minimap;
-
-typedef struct s_bre
-{
-	int		width;
-	int		height;
-	int		dx1;
-	int		dy1;
-	int		dx2;
-	int		dy2;
-	int		longest;
-	int		shortest;
-	int		numerator;
-}				t_bre;
-
-typedef struct s_coor
-{
-	int		x1;
-	int		y1;
-	int		xold;
-	int		yold;
-	int		tile_size;
-}				t_coor;
-
 typedef struct s_info
 {
 	t_list			**lst;
@@ -157,7 +124,6 @@ typedef struct s_info
 	t_cast			cast;
 	t_key			key;
 	char			**map;
-	int				minimap_color;
 }					t_info;
 
 			/* Parsing of the .cub file */
@@ -233,18 +199,5 @@ void	set_wall_hit(t_info *info);
 void	build_t(t_info *info, t_texture *tex, int i);
 void	draw_wall(t_info *info, int x);
 void	draw_background(t_info *info, int i);
-
-//minimap.c
-void	draw_player_rays(t_info *info, t_minimap *minimap);
-void	draw_player(t_info *info, t_minimap *minimap);
-t_minimap	minimap_init(void);
-void	chose_minimap_color(t_info *info, t_minimap *minimap);
-void	draw_minimap(t_info *info, t_minimap minimap);
-
-//bresenham.c
-void	img_pix_put(t_info *info, int x, int y);
-void	prep_axe(t_coor *coor, t_bre *bre);
-void	correct_axe(t_bre *bre);
-void	bresenham_new(t_info *info, t_coor *coor);
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_raycast(t_info *info, int x)
 {
@@ -110,6 +110,7 @@ int	raycasting(t_info *info)
 		draw_background(info, x);
 		draw_wall(info, x);
 	}
+	draw_minimap(info, minimap_init());
 	mlx_put_image_to_window(info->mlx.mlx_ptr, info->mlx.win_ptr,
 		info->mlx.img_ptr, 0, 0);
 	return (0);
