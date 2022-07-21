@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:53:16 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 14:54:37 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:20:33 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	handle_error(int ret, t_info *info)
 
 static int	check_space_island(char **map, int i, int j, int limit)
 {
-	int ret;
+	int	ret;
 
 	ret = 1;
 	if (i == limit)
@@ -72,7 +72,7 @@ int	check_island(char **map)
 	return (0);
 }
 
-static void	mlx_clear(t_info *info)
+void	mlx_clear(t_info *info)
 {
 	if (info->env.wall_ea.tex_ptr)
 		mlx_destroy_image(info->mlx.mlx_ptr, info->env.wall_ea.tex_ptr);
@@ -85,20 +85,10 @@ static void	mlx_clear(t_info *info)
 	if (info->mlx.img_ptr)
 		mlx_destroy_image(info->mlx.mlx_ptr, info->mlx.img_ptr);
 	if (info->mlx.mlx_window)
-	{
-		//mlx_clear_window(info->mlx.mlx_ptr, info->mlx.mlx_window);
 		mlx_destroy_window(info->mlx.mlx_ptr, info->mlx.mlx_window);
-	}
 	if (info->mlx.win_ptr)
 		mlx_destroy_window(info->mlx.mlx_ptr, info->mlx.win_ptr);
 	if (info->mlx.mlx_ptr)
 		mlx_destroy_display(info->mlx.mlx_ptr);
 	free(info->mlx.mlx_ptr);
-}
-
-int	exit_window(t_info *info, char *msg)
-{
-	mlx_clear(info);
-	display_error(msg, EXIT_SUCCESS, info);
-	return (1);
 }

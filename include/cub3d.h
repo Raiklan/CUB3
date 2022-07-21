@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/19 16:36:03 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:21:29 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ void	*free_info(t_info *info);
 int		count_lst(t_list *lst);
 int		leave_prog(void *info);
 
-
 //check_spaces.c
 int		check_space(char **map, int i, int j);
 int		check_space_closed(char **map, int i, int j, int limit);
@@ -162,6 +161,7 @@ void	*display_error(char *msg, int code, t_info *info);
 int		check_island(char **map);
 int		exit_window(t_info *info, char *msg);
 int		size_map(char **map);
+void	mlx_clear(t_info *info);
 
 //check_rgb.c
 int		check_rgb(char *str_c, char *str_f, t_texture *text);
@@ -185,8 +185,8 @@ void	rotate_left(t_info *info);
 void	rotate_right(t_info *info);
 
 //key.c
-int	get_number(int key, t_info *info);
-int	push_nbr(int key, t_info *info);
+int		get_number(int key, t_info *info);
+int		push_nbr(int key, t_info *info);
 
 //movement.c
 void	ft_move(t_info *info);
@@ -200,5 +200,10 @@ void	set_wall_hit(t_info *info);
 void	build_t(t_info *info, t_texture *tex, int i);
 void	draw_wall(t_info *info, int x);
 void	draw_background(t_info *info, int i);
+
+//init_view.c
+void	init_struct(t_info *info);
+int		print_error(char *str);
+void	setup_view(t_info *info);
 
 #endif

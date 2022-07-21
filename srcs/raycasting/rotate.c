@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:14:31 by saich             #+#    #+#             */
-/*   Updated: 2022/07/19 16:16:44 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:16:02 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ void	rotate_left(t_info *info)
 	info->cast.plany = old_planx * sin(ROTATESPEED) + info->cast.plany
 		* cos(ROTATESPEED);
 }
-

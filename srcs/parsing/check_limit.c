@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:36:00 by saich             #+#    #+#             */
-/*   Updated: 2022/07/18 19:39:04 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:16:16 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ void	parse_map(char **map, t_info *info)
 		display_error("Error map", 10, info);
 	if (check_island(map))
 		display_error("Error map has an empty line or empty colone", 1, info);
-	/* if (check_char_map(map))
-		display_error("Map has unauthorized char", 1, info); */
 	get_pos(map, info);
 	if (info->env.pos_dir == 0)
 		display_error("no starting position defined", EXIT_FAILURE, info);

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:52 by saich             #+#    #+#             */
-/*   Updated: 2022/07/18 19:42:37 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:12:54 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ int	check_rgb(char *str_c, char *str_f, t_texture *texture)
 		return (1);
 	return (0);
 } */
+
+int	exit_window(t_info *info, char *msg)
+{
+	mlx_clear(info);
+	display_error(msg, EXIT_SUCCESS, info);
+	return (1);
+}
 
 int	get_color(int r, int g, int b, t_info *info)
 {
