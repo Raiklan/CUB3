@@ -115,7 +115,7 @@ typedef struct s_mlx
 	int				endian;
 }	t_mlx;
 
-typedef struct	s_minimap
+typedef struct s_minimap
 {
 	int	i;
 	int	j;
@@ -123,7 +123,7 @@ typedef struct	s_minimap
 	int	col_count;
 	int	x;
 	int	y;
-	int tile_size;
+	int	tile_size;
 }				t_minimap;
 
 typedef struct s_bre
@@ -237,7 +237,7 @@ void	draw_background(t_info *info, int i);
 //minimap.c
 void	draw_player_rays(t_info *info, t_minimap *minimap);
 void	draw_player(t_info *info, t_minimap *minimap);
-t_minimap	minimap_init();
+t_minimap	minimap_init(void);
 void	chose_minimap_color(t_info *info, t_minimap *minimap);
 void	draw_minimap(t_info *info, t_minimap minimap);
 
