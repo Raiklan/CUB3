@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/07/19 16:38:00 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 14:45:26 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ to get data from .cub\n"));
 		}
 		tmp = tmp->next;
 	}
-	//printf("%s\n%s\n%s\n%s\n", info->env.wall_ea.path, info->env.wall_so.path, info->env.wall_no.path, info->env.wall_we.path);
 	if (count != 6 || ret != 2)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
