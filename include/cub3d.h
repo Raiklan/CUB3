@@ -124,6 +124,7 @@ typedef struct s_info
 	t_cast			cast;
 	t_key			key;
 	char			**map;
+	int				minimap_color;
 }					t_info;
 
 			/* Parsing of the .cub file */

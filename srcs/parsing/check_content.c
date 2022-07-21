@@ -31,6 +31,7 @@ t_info	*init_info(void)
 	info->map = NULL;
 	info->resolution.y = 600;
 	info->resolution.x = 800;
+	info->minimap_color = 0x0;
 	return (info);
 }
 
