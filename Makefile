@@ -41,7 +41,7 @@ SRCS_BONUS =	srcs/main.c	\
 				srcs/raycasting/rotate.c \
 				srcs/raycasting/key.c \
 				bonus/raycasting_bonus.c \
-				srcs/raycasting/movement.c \
+				bonus/movement_bonus.c \
 				bonus/bresenham_bonus.c \
 				bonus/minimap_bonus.c
 
