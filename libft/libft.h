@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 15:25:31 by gpaul             #+#    #+#             */
-/*   Updated: 2022/06/10 13:47:03 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:10:35 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_split
 	size_t		i;
 }				t_split;
 
-long long int				ft_atoi(const char *str);
+long long int				ft_atoi(char *str);
 size_t						ft_strlen(const char *str);
 int							ft_isalnum(int i);
 int							ft_isalpha(int i);

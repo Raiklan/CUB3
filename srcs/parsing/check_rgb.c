@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:52 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:12:54 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:40:19 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,27 @@ int	check_rgb(char *str_c, char *str_f, t_texture *texture)
 	return (0);
 } */
 
+static int	check_line(char *line)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (line[++i])
+	{
+		if (line[i] == ',')
+			count++;
+		if (!ft_isdigit(line[i]) && line[i] != ',')
+			return (1);
+		if (line[i] == ',' && line[i + 1] && line[i + 1] == ',')
+			return (1);
+	}
+	if (count != 2)
+		return (1);
+	return (0);
+}
+
 int	exit_window(t_info *info, char *msg)
 {
 	mlx_clear(info);
@@ -138,21 +159,15 @@ int	parse_color(t_info *info, char *line, int ret)
 	int	b;
 	int	i;
 
-	i = -1;
-	while (line[++i])
-	{
-		if (!ft_isdigit(line[i]) && line[i] != ',')
-			return (1);
-		if (line[i] == ',' && line[i + 1] && line[i + 1] == ',')
-			return (1);
-	}
+	if (check_line(line))
+		return (1);
 	i = 0;
 	r = ft_atoi(line);
-	while (ft_isdigit(line[i]))
+	while (line[i] && ft_isdigit(line[i]))
 		i++;
 	line += i + 1;
 	g = ft_atoi(line);
-	while (ft_isdigit(line[i]))
+	while (line[i] && ft_isdigit(line[i]))
 		i++;
 	line += i + 1;
 	b = ft_atoi(line);

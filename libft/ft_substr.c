@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 01:41:51 by gpaul             #+#    #+#             */
-/*   Updated: 2022/07/21 16:02:57 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:15:47 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	str = (char *)s;
-	re = malloc(sizeof(char) * len + 1);
+	re = ft_calloc(len + 1, sizeof(char));
 	if (re == NULL)
 		return (NULL);
 	if (start >= (unsigned int)ft_strlen(s))

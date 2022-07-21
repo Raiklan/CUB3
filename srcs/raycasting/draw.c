@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:27:39 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:15:57 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:52:04 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	build_t(t_info *info, t_texture *tex, int i)
 
 void	draw_wall(t_info *info, int x)
 {
-	if (!info->cast.side && info->cast.ray_dirx > 0)
+	if (!info->cast.side && info->cast.ray_dirx < 0)
 		build_t(info, &info->env.wall_no, x);
-	else if (!info->cast.side && info->cast.ray_dirx < 0)
+	else if (!info->cast.side && info->cast.ray_dirx > 0)
 		build_t(info, &info->env.wall_so, x);
 	else if (info->cast.side && info->cast.ray_diry > 0)
 		build_t(info, &info->env.wall_we, x);
