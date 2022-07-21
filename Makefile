@@ -21,6 +21,7 @@ SRCS =	srcs/main.c	\
 		srcs/raycasting/rotate.c \
 		srcs/raycasting/movement.c \
 		srcs/raycasting/key.c \
+		srcs/parsing/init_view.c 
 
 SRCS_BONUS =	srcs/main.c	\
 				srcs/utils/get_next_line.c \
@@ -29,6 +30,7 @@ SRCS_BONUS =	srcs/main.c	\
 				srcs/parsing/empty_space.c \
 				srcs/parsing/check_map.c \
 				srcs/parsing/check_border.c \
+				srcs/parsing/init_view.c \
 				srcs/utils/free_utils.c \
 				srcs/parsing/check_space.c \
 				srcs/parsing/check_limit.c \
