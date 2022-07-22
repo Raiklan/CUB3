@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:36:00 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:16:16 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/22 20:46:47 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	parse_map(char **map, t_info *info)
 {
 	int	ret;
 
+	suppr_empty_line_map(map);
 	if (!check_limit(map[0]) || !check_limit(map[map_length(map)]))
 		display_error("Error map", 10, info);
 	if (check_island(map))

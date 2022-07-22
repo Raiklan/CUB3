@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:26:38 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 16:14:19 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/22 16:41:24 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ void	cub3d(t_info *info)
 {
 	init_struct(info);
 	info->mlx.mlx_ptr = mlx_init();
+	if (!info->mlx.mlx_ptr)
+		display_error("Mlx didn't init!", 1, info);
 	get_all_texture(info);
 	info->mlx.img_ptr = mlx_new_image(info->mlx.mlx_ptr, info->resolution.x,
 			info->resolution.y);
+	if (!info->mlx.img_ptr)
+		exit_window(info, "Mlx img didn't init!");
 	info->mlx.img_addr = (unsigned int *)mlx_get_data_addr(info->mlx.img_ptr,
 			&(info->mlx.bpp), &(info->mlx.size_line), &(info->mlx.endian));
 	info->mlx.win_ptr = mlx_new_window(info->mlx.mlx_ptr, info->resolution.x,
 			info->resolution.y, "CUB3D");
+	if (!info->mlx.win_ptr)
+		exit_window(info, "Mlx didn't create window");
 	mlx_hook(info->mlx.win_ptr, 17, 0L, leave_prog, info);
 	mlx_hook(info->mlx.win_ptr, 3, (1L << 1), push_nbr, info);
 	mlx_hook(info->mlx.win_ptr, 2, (1L << 0), get_number, info);

@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 22:48:24 by saich             #+#    #+#             */
-/*   Updated: 2022/07/18 20:14:42 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/22 18:16:48 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	empty_space_line(t_list *lst)
 	str = lst->content;
 	while (str[i])
 	{
-		if (str[i] != '\n' && str[i] != ' ' && str[i] != '\t')
+		if (str[i] != '\n' && str[i] != ' ')
 			count = 1;
 		i++;
 	}

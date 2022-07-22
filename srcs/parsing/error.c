@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:53:16 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 18:50:28 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/22 21:06:04 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,62 @@ static int	check_space_island(char **map, int i, int j, int limit)
 	return (ret);
 }
 
-int	check_island(char **map)
+static int	check_line_space(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] == ' ')
+	{
+		i++;
+	}
+	if (!line[i])
+		return (1);
+	return (0);
+}
+
+int	check_if_last_wall(char **map)
 {
 	int	i;
 	int	j;
+	int	tmp;
 
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
-		if (map[i][0] == '\n')
-			return (1);
-		while (map[i][j] && map[i][j] == ' ')
+		while (map[i][j])
+		{
+			if (map[i][j] == '1')
+				tmp = i;
 			j++;
-		if (map[i][j] == '\0')
+		}
+		i++;
+	}
+	return (tmp);
+}
+
+int	check_island(char **map)
+{
+	int	i;
+	int	j;
+
+	while (map[i])
+	{
+		j = 0;
+		if (check_line_space(map[i]))
 			return (1);
+		while (map[i][j])
+		{
+			if (map[i][j] == '\n')
+				return (1);
+			j++;
+		}
 		i++;
 	}
 	while (map[0][j])
 	{
-		if (map[0][j] == ' ')
+		if (map[0][j] == ' '/*  !is_last_col(map, j) */)
 			if (!check_space_island(map, 0, j, map_length(map)))
 				return (1);
 		j++;
@@ -91,4 +127,35 @@ void	mlx_clear(t_info *info)
 	if (info->mlx.mlx_ptr)
 		mlx_destroy_display(info->mlx.mlx_ptr);
 	free(info->mlx.mlx_ptr);
+}
+
+int	suppr_empty_line_map(char **map)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = map_length(map);
+	while (i >= 0)
+	{
+		j = ft_strlen(map[i]);
+		while (j >= 0)
+		{
+			if (map[i][j] == '1')
+			{
+				tmp = i;
+				i++;
+				while (map[i])
+				{
+					free(map[i]);
+					i++;
+				}
+				map[tmp + 1] = NULL;
+				return (0);
+			}
+			j--;
+		}
+		i--;
+	}
+	return (0);
 }

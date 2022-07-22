@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:44:13 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 19:01:08 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/22 16:31:25 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ t_info	*init_info(void)
 {
 	t_info	*info;
 
-	if (check_malloc(&info, sizeof(t_info)))
+	info = ft_calloc(1, sizeof(t_info));
+	if (!info)
 		return (NULL);
-	if (check_malloc(&info->lst, sizeof(t_list)))
+	info->lst = ft_calloc(1, sizeof(t_list));
+	if (!info->lst)
 		return (NULL);
 	info->env.pos_dir = 0;
 	ft_bzero(&info->env, sizeof(info->env));
