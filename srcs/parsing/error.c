@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:53:16 by saich             #+#    #+#             */
-/*   Updated: 2022/07/22 21:06:04 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 14:44:56 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	handle_error(int ret, t_info *info)
 		display_error("missing 1 at the end of a line", EXIT_FAILURE, info);
 }
 
-static int	check_space_island(char **map, int i, int j, int limit)
+int	check_space_island(char **map, int i, int j, int limit)
 {
 	int	ret;
 
 	ret = 1;
 	if (i == limit)
 		return (0);
-	if (map[i + 1] && map[i + 1][j] == ' ')
+	if (map[i + 1] && map[i + 1][j] && map[i + 1][j] == ' ')
 		ret = check_space_island(map, i + 1, j, limit);
 	return (ret);
 }
@@ -59,22 +59,16 @@ static int	check_line_space(char *line)
 	return (0);
 }
 
-int	check_if_last_wall(char **map)
+int	check_last_col(char **map)
 {
 	int	i;
-	int	j;
 	int	tmp;
 
 	i = 0;
-	while (map[i])
+	while (map[0][i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == '1')
-				tmp = i;
-			j++;
-		}
+		if (map[0][i] == '1')
+			tmp = i;
 		i++;
 	}
 	return (tmp);
@@ -99,13 +93,8 @@ int	check_island(char **map)
 		}
 		i++;
 	}
-	while (map[0][j])
-	{
-		if (map[0][j] == ' '/*  !is_last_col(map, j) */)
-			if (!check_space_island(map, 0, j, map_length(map)))
-				return (1);
-		j++;
-	}
+	if (check_col(map))
+		return (1);
 	return (0);
 }
 

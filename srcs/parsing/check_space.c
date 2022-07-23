@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:19:30 by saich             #+#    #+#             */
-/*   Updated: 2022/07/21 18:54:16 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:15:30 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int	check_closed_first(char **map, int i, int j)
 	int	ret;
 
 	ret = 0;
-	if (map[i][j + 1] == '1' || map[i][j + 1] == ' ')
+	if (map[i][j + 1] && (map[i][j + 1] == '1' || map[i][j + 1] == ' '))
 		ret++;
-	if (map[i + 1][j] == '1' || map[i + 1][j] == ' ')
+	if (map[i + 1][j] && (map[i + 1][j] == '1' || map[i + 1][j] == ' '))
 		ret++;
-	if (map[i][j - 1] == '1' || map[i][j - 1] == ' ')
+	if (map[i][j - 1] && (map[i][j - 1] == '1' || map[i][j - 1] == ' '))
 		ret++;
 	if (ret == 3)
 		return (1);
@@ -52,14 +52,14 @@ int	check_closed(char **map, int i, int j, int last)
 	int	ret;
 
 	ret = 0;
-	if (map[i][j + 1] == '1' || map[i][j + 1] == ' ')
+	if (map[i][j + 1] && (map[i][j + 1] == '1' || map[i][j + 1] == ' '))
 		ret++;
 	if (last)
-		if (map[i + 1][j] == '1' || map[i + 1][j] == ' ')
+		if (map[i + 1][j] && (map[i + 1][j] == '1' || map[i + 1][j] == ' '))
 			ret++;
-	if (map[i][j - 1] == '1' || map[i][j - 1] == ' ')
+	if (map[i][j - 1] && (map[i][j - 1] == '1' || map[i][j - 1] == ' '))
 		ret++;
-	if (map[i - 1][j] == '1' || map[i - 1][j] == ' ')
+	if (map[i - 1][j] && (map[i - 1][j] == '1' || map[i - 1][j] == ' '))
 		ret++;
 	if (last && ret == 4)
 		return (1);
@@ -75,11 +75,11 @@ int	check_space_closed(char **map, int i, int j, int limit)
 	ret = 1;
 	if (i == limit)
 		return (2);
-	if (map[i][j + 1] == ' ')
+	if (map[i][j + 1] && map[i][j + 1] == ' ')
 		ret = check_space_closed(map, i, j + 1, limit);
-	else if (map[i + 1][j] == ' ')
+	else if (map[i + 1][j] && map[i + 1][j] == ' ')
 		ret = check_space_closed(map, i + 1, j, limit);
-	else if (map[i + 1][j + 1] == ' ')
+	else if (map[i + 1][j + 1] && map[i + 1][j + 1] == ' ')
 		ret = check_space_closed(map, i + 1, j + 1, limit);
 	if (!check_closed(map, i, j, 1))
 		return (0);
@@ -90,6 +90,8 @@ int	check_space(char **map, int i, int j)
 {
 	while (map[i][++j])
 	{
+		if (check_line_space(map, i))
+			return (0);
 		if (i == 1 && !check_space_first(map))
 			return (0);
 		if (map[i][j] == ' ')
@@ -99,4 +101,18 @@ int	check_space(char **map, int i, int j)
 		}
 	}
 	return (1);
+}
+
+int	check_line_space(char **map, int i)
+{
+	int	j;
+
+	j = 0;
+	while (map[i][j])
+	{
+		if (j > last_wall_line(map[i]) && map[i][j] != ' ')
+			return (1);
+		j++;
+	}
+	return (0);
 }

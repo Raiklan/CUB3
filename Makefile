@@ -22,6 +22,7 @@ SRCS =	srcs/main.c	\
 		srcs/raycasting/rotate.c \
 		srcs/raycasting/movement.c \
 		srcs/raycasting/key.c \
+		srcs/parsing/check_line.c \
 		srcs/parsing/init_view.c 
 
 SRCS_BONUS =	srcs/main.c	\
@@ -36,6 +37,7 @@ SRCS_BONUS =	srcs/main.c	\
 				srcs/parsing/check_space.c \
 				srcs/parsing/check_limit.c \
 				srcs/parsing/error.c \
+				srcs/parsing/check_line.c \
 				srcs/parsing/check_rgb.c \
 				srcs/texture.c \
 				srcs/raycasting/draw.c \
@@ -50,7 +52,7 @@ OBJ_BONUS		= ${SRCS_BONUS:.c=.o}
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra #-Werror
 
 all :
 	@make bonus -C $(LIBFT)
