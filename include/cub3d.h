@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 15:14:46 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:24:11 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int		check_space_island(char **map, int i, int j, int limit);
 int		check_col(char **map);
 int		check_last_col(char **map);
 int		last_wall_line(char *line);
-int		check_line_space(char **map, int i);
+int		check_space_line(char **map, int i);
 
 
 //free_utils.c

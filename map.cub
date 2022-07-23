@@ -5,6 +5,7 @@ EA ./textures/red_wall.xpm
 
 
 NO ./textures/blue_wall.xpm
+NO ./textures/blue_wall.xpm
 
 
 
@@ -20,7 +21,7 @@ SO ./textures/green_wall.xpm
 
 F 220,200,10
 
-    1111111         
+    1111111
     1111111
     1N11111
     1111111

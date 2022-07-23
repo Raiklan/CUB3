@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:19:30 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 15:15:30 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:24:41 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	check_space(char **map, int i, int j)
 {
 	while (map[i][++j])
 	{
-		if (check_line_space(map, i))
+		if (check_space_line(map, i))
 			return (0);
 		if (i == 1 && !check_space_first(map))
 			return (0);
@@ -103,7 +103,7 @@ int	check_space(char **map, int i, int j)
 	return (1);
 }
 
-int	check_line_space(char **map, int i)
+int	check_space_line(char **map, int i)
 {
 	int	j;
 

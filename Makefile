@@ -52,7 +52,7 @@ OBJ_BONUS		= ${SRCS_BONUS:.c=.o}
 OBJ		= ${SRCS:.c=.o}
 OBJS	= *.o
 CC		= gcc
-CFLAGS	= -Wall -Wextra #-Werror
+CFLAGS	= -Wall -Wextra -Werror
 
 all :
 	@make bonus -C $(LIBFT)
