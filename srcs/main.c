@@ -111,12 +111,12 @@ int	main(int ac, char **av)
 configuration of the map !\n");
 		return (EXIT_FAILURE);
 	}
-	info = init_info();
-	if (!info || !info->lst)
-		return (EXIT_FAILURE);
 	if (check_cub_ext(av))
 		return (EXIT_FAILURE);
 	if (check_cub_rights(av))
+		return (EXIT_FAILURE);
+	info = init_info();
+	if (!info || !info->lst)
 		return (EXIT_FAILURE);
 	if (get_info(av, info))
 		return (EXIT_FAILURE);

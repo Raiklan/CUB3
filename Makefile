@@ -61,15 +61,12 @@ all :
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I include/
 
 $(NAME)	: $(OBJ)
+	@make bonus -C $(LIBFT)
 	$(CC) $(CFLAGS) -I libft/ -I include/ -I mlx_linux/ $(OBJ) libft/libft.a -o $(NAME) $(LIB)
 
 bonus : $(OBJ_BONUS)
 	@make bonus -C $(LIBFT)
 	$(CC) $(CFLAGS) -I libft/ -I include/ -I mlx_linux/ $(OBJ_BONUS) libft/libft.a -o $(NAME_BONUS) $(LIB)
-
-key :#a retirer
-	cd ./mlx_linux && make && cd ..
-	$(CC) srcs/key_handling.c -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o key
 
 clean :
 		@make clean -C $(LIBFT)
