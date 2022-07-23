@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 15:26:45 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:52:12 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,8 @@ int	right_conf_for_cub(t_list **lst, t_info *info)
 	while (tmp)
 	{
 		ret = right_name(tmp->content, info, ret);
-		if (ret == -1)
-			return (print_error("Malloc failed in ft_substr \
-to get data from .cub\n"));
+		if ((!ret && !is_map(tmp->content)) || ret == -1)
+			return (1);
 		if (ret)
 			count++;
 		if (is_map(tmp->content))

@@ -59,7 +59,6 @@ CFLAGS	= -Wall -Wextra -Werror
 all :
 	@make bonus -C $(LIBFT)
 	@make $(NAME)
-	@make bonus
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I include/
