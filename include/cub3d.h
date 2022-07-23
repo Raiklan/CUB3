@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 15:31:57 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:33:21 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ int		check_col(char **map);
 int		check_last_col(char **map);
 int		last_wall_line(char *line);
 int		check_space_line(char **map, int i);
-
 
 //free_utils.c
 void	*free_info(t_info *info);
