@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 23:55:38 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 14:30:10 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:26:45 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	right_name3(char *str, t_info *info)
 {
-	if (!ft_strncmp(str, "WE", 2)  && !info->env.wall_we.path)
+	if (!ft_strncmp(str, "WE", 2) && !info->env.wall_we.path)
 	{
 		info->env.wall_we.path = ft_substr(str, 2, ft_strlen(str));
 		if (!info->env.wall_we.path)
@@ -37,7 +37,7 @@ static int	right_name2(char *str, t_info *info)
 	int	ret;
 
 	ret = 0;
-	if (!ft_strncmp(str, "EA", 2)  && !info->env.wall_ea.path)
+	if (!ft_strncmp(str, "EA", 2) && !info->env.wall_ea.path)
 	{
 		info->env.wall_ea.path = ft_substr(str, 2, ft_strlen(str));
 		ret = 1;

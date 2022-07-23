@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:19:30 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 15:24:41 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:27:00 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,4 @@ int	check_space(char **map, int i, int j)
 		}
 	}
 	return (1);
-}
-
-int	check_space_line(char **map, int i)
-{
-	int	j;
-
-	j = 0;
-	while (map[i][j])
-	{
-		if (j > last_wall_line(map[i]) && map[i][j] != ' ')
-			return (1);
-		j++;
-	}
-	return (0);
 }

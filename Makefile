@@ -17,6 +17,7 @@ SRCS =	srcs/main.c	\
 		srcs/parsing/error.c \
 		srcs/parsing/check_rgb.c \
 		srcs/texture.c \
+		srcs/parsing/error2.c \
 		srcs/raycasting/raycasting.c \
 		srcs/raycasting/draw.c \
 		srcs/raycasting/rotate.c \
@@ -32,6 +33,7 @@ SRCS_BONUS =	srcs/main.c	\
 				srcs/parsing/empty_space.c \
 				srcs/parsing/check_map.c \
 				srcs/parsing/check_border.c \
+				srcs/parsing/error2.c \
 				srcs/parsing/init_view.c \
 				srcs/utils/free_utils.c \
 				srcs/parsing/check_space.c \

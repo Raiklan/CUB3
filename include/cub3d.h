@@ -6,7 +6,7 @@
 /*   By: saich <saich@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:39:47 by saich             #+#    #+#             */
-/*   Updated: 2022/07/23 15:24:11 by saich            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:31:57 by saich            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,6 @@ void	init_struct(t_info *info);
 int		print_error(char *str);
 void	setup_view(t_info *info);
 void	suppr_emptyl_after(t_list *tmp);
-int		suppr_empty_line_map(char **map);
+int		suppr_empty_line_map(char **map, int i, int j, int tmp);
 
 #endif
